@@ -18,9 +18,8 @@ import webapp2
 import jinja2
 import os
 import logging
+from google.appengine.api import urlfetch
 import urllib
-import urllib3
-import requests
 import urlparse
 
 from environment_variables import *
@@ -29,16 +28,15 @@ jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 def query(q, fl="id"):
+    BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
                           'fl':fl,
                           'wt':'json',
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY})
-    http = urllib3.PoolManager()
-    r = http.request('GET', url)
-    #r = requests.get(url)
-    print dir(r)
-    return r.json()
+    result = urlfetch.fetch(url)
+    print dir(result)
+    return result.content
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
