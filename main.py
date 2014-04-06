@@ -18,7 +18,8 @@ import webapp2
 import jinja2
 import os
 import logging
-
+from environment_variables import *
+ 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
@@ -27,6 +28,8 @@ class MainHandler(webapp2.RequestHandler):
         template_values = {}
         template = jinja_environment.get_template("home.html")
         self.response.out.write(template.render(template_values))
+        self.response.out.write(FSM_APP_KEY+"</br>")
+        self.response.out.write(FSM_APP_ID)
         
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
