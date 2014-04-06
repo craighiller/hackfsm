@@ -35,7 +35,15 @@ def query(q, fl="id"):
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY})
     result = urlfetch.fetch(url)
-    print dir(result)
+    return result.content
+
+def find(id):
+    BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':id,
+        'wt':'json',
+        'app_id':FSM_APP_ID,
+        'app_key':FSM_APP_KEY})
+    result = urlfetch.fetch(url)
     return result.content
 
 class MainHandler(webapp2.RequestHandler):
@@ -49,10 +57,16 @@ class MainHandler(webapp2.RequestHandler):
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("search")
-        self.response.out.write(query(q)) 
+        self.response.out.write(query(q))
+
+class ArticleHandler(webapp2.RequestHandler):
+    def get(self):
+        myId = self.request.get("id")
+        self.response.out.write(find(myId))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/search', SearchHandler)
+    ('/search', SearchHandler),
+    ('/article', ArticleHandler)
 ], debug=True)
 
