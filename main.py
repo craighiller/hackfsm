@@ -83,7 +83,12 @@ class SearchHandler(webapp2.RequestHandler):
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
         myId = self.request.get("id")
-        self.response.out.write(find(myId))
+        info = eval(find(myId))
+        image_link = info["response"]["docs"][0]["fsmImageUrl"][-1]
+        template_values = {}
+        template_values['picture_link'] = image_link
+        template = jinja_environment.get_template("article.html")
+        self.response.out.write(template.render(template_values))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
