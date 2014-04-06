@@ -39,12 +39,13 @@ def query(q, fl="id"):
 
 def find(id):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
-    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':id,
-        'wt':'json',
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':'id:' + id,
+        'wt':'python',
         'app_id':FSM_APP_ID,
         'app_key':FSM_APP_KEY})
     result = urlfetch.fetch(url)
     return result.content
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -55,6 +56,8 @@ class MainHandler(webapp2.RequestHandler):
 class SearchHandler(webapp2.RequestHandler):
     def post(self):
         q = self.request.get("search")
+        if not self.request.get("text"):
+            q = q + ' AND -fsmTeiUrl:[* TO *]'
         self.response.out.write(query(q))
         self.response.out.write("</br></br>"+self.request.get("text")+"</br></br>"+self.request.get("image")+"</br></br>"+self.request.get("video"))
 
