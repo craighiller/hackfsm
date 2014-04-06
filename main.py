@@ -46,6 +46,12 @@ def find(id):
     result = urlfetch.fetch(url)
     return result.content
 
+def appendToQuery(q, elem):
+    if q == '':
+        return elem
+    return q + ' AND ' + elem
+
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -57,9 +63,12 @@ class SearchHandler(webapp2.RequestHandler):
     def post(self):
         q = self.request.get("search")
         if not self.request.get("text"):
-            q = q + ' AND -fsmTeiUrl:[* TO *]'
+            q = appendToQuery(q, '-fsmTeiUrl:[* TO *]')
+        if not self.request.get("image"):
+            q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
+        #if not self.request.get("video"):
+        #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
         self.response.out.write(query(q))
-        self.response.out.write("</br></br>"+self.request.get("text")+"</br></br>"+self.request.get("image")+"</br></br>"+self.request.get("video"))
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
