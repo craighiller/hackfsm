@@ -51,11 +51,9 @@ class MainHandler(webapp2.RequestHandler):
         template_values = {}
         template = jinja_environment.get_template("home.html")
         self.response.out.write(template.render(template_values))
-        self.response.out.write(FSM_APP_KEY+"</br>")
-        self.response.out.write(FSM_APP_ID)
-
+        
 class SearchHandler(webapp2.RequestHandler):
-    def get(self):
+    def post(self):
         q = self.request.get("search")
         self.response.out.write(query(q))
 
