@@ -18,20 +18,66 @@ import webapp2
 import jinja2
 import os
 import logging
+from google.appengine.api import urlfetch
+import urllib
+import urlparse
+
 from environment_variables import *
  
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+
+def query(q, fl="id"):
+    BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
+                          'fl':fl,
+                          'wt':'python',
+                          'app_id':FSM_APP_ID,
+                          'app_key':FSM_APP_KEY})
+    result = urlfetch.fetch(url)
+    return eval(result.content)
+
+def find(id):
+    BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':'id:' + id,
+        'wt':'python',
+        'app_id':FSM_APP_ID,
+        'app_key':FSM_APP_KEY})
+    result = urlfetch.fetch(url)
+    return result.content
+
+def appendToQuery(q, elem):
+    if q == '':
+        return elem
+    return q + ' AND ' + elem
+
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {}
         template = jinja_environment.get_template("home.html")
         self.response.out.write(template.render(template_values))
-        self.response.out.write(FSM_APP_KEY+"</br>")
-        self.response.out.write(FSM_APP_ID)
         
+class SearchHandler(webapp2.RequestHandler):
+    def post(self):
+        q = self.request.get("search")
+        if not self.request.get("text"):
+            q = appendToQuery(q, '-fsmTeiUrl:[* TO *]')
+        if not self.request.get("image"):
+            q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
+        #if not self.request.get("video"):
+        #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
+        self.response.out.write(query(q))
+
+class ArticleHandler(webapp2.RequestHandler):
+    def get(self):
+        myId = self.request.get("id")
+        self.response.out.write(find(myId))
+      
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/search', SearchHandler),
+    ('/article', ArticleHandler)
 ], debug=True)
 
