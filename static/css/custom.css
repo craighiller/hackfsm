@@ -6,11 +6,6 @@ html, body{
 h1 {
 }
 
-body {
-	background-image: url(/static/background.jpg);
-}
-
-
 #body-wrapper {
 	background-image: url(/static/background.jpg);
 }
