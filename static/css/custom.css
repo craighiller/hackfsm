@@ -3,11 +3,15 @@ html, body{
 	padding: 0;
 }
 
-h1 {
+
+body {
+	background: url(/static/background.jpg) fixed; 
+  	background-size: cover;
 }
 
-#body-wrapper {
-	background-image: url(/static/background.jpg);
+h1 {
+	text-align: center;
+	padding: 1%;
 }
 
 #wrapper {
@@ -15,5 +19,7 @@ h1 {
 }
 
 #search-form {
+	margin-left: 20%;
 }
+
 
