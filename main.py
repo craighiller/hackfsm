@@ -40,11 +40,21 @@ def query(q, fl="id"):
 def find(id):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':'id:' + id,
-        'wt':'python',
+        'wt':'json',
         'app_id':FSM_APP_ID,
         'app_key':FSM_APP_KEY})
     result = urlfetch.fetch(url)
     return result.content
+
+def escapeAndFixId(id):
+    id = id.replace(':', '\:')
+    splitted = id.split(' ')
+    if len(splitted) == 1:
+        return id
+    splitted[-2] = splitted[-2] + ' ' + splitted[-1]
+    splitted.pop()
+    return ''.join(splitted)
+
 
 def appendToQuery(q, elem):
     if q == '':
