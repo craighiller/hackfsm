@@ -23,6 +23,7 @@ import urllib
 import urlparse
 from xml.etree import ElementTree as et
 from xml.dom.minidom import parse
+import cgi
 
 from environment_variables import *
  
@@ -82,7 +83,7 @@ class SearchHandler(webapp2.RequestHandler):
         template_values = {}
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
-        template_values["query"] = results["responseHeader"]["params"]["q"]
+        template_values["query"] = cgi.escape(results["responseHeader"]["params"]["q"])
         template_values["response"] = results["response"]["docs"]
         self.response.out.write(template.render(template_values))
 
