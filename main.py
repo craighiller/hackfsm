@@ -89,8 +89,6 @@ class SearchHandler(webapp2.RequestHandler):
             template_values["queryParameters"] = self.request.query_string
         start = int(start) - 1
         startRow = start*rowsPerPage
-        template_values["startRange"] = start*rowsPerPage
-        template_values["endRange"] = (start+1)*rowsPerPage
 
         template_values["queryParameters"] = "&".join(template_values["queryParameters"].split('&')[:-1])
 
@@ -100,6 +98,8 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["query"] = cgi.escape(results["responseHeader"]["params"]["q"])
         template_values["numPages"] = results["response"]["numFound"] // 30 + 1
         template_values["response"] = results["response"]["docs"]
+        template_values["startRange"] = start*rowsPerPage
+        template_values["endRange"] = min((start+1)*rowsPerPage, results["response"]["numFound"])
         self.response.out.write(template.render(template_values))
 
 class ArticleHandler(webapp2.RequestHandler):
