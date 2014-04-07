@@ -3,11 +3,11 @@ html, body{
 	padding: 0;
 }
 
-
 body {
 	background: url(/static/background.jpg) fixed; 
   	background-size: cover;
 }
+
 
 h1 {
 	font-size: 300%;
@@ -44,20 +44,9 @@ h1 {
 	height:25px; 
 }
 
-
-#header input[type=search] {
-	width:200px; 
-	height:25px; 
-}
-
-form {
+#search-form {
+	text-align: left;
 	position: relative;
 	top: -100px;
 	left: 590px;
 }
-
-#search-form {
-	text-align: left;
-}
-
-
