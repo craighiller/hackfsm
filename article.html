@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Speech Movement Archive</title>
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  
+</head>
+<script type="text/javascript">
+
+</script>
+<body>
+  <table>
+    <th>HEADER</th>
+    <th>CONTENT</th>
+    {% for key in results %}
+      <tr>
+        <td>{{key}}</td>
+        <td>{{" ".join(results[key])}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% if picture_link %}
+    <h1>PICTURE</h1>
+    <img src={{picture_link}} style="max-height:100%" />
+  {% else %}
+    <h1>ARTICLE</h1>
+    {{content}}
+  {% endif %}
+</body>
+</html>
