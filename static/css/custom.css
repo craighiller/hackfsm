@@ -45,13 +45,13 @@ h1 {
 	height:25px; 
 }
 
+button {
+	margin-left: 1.5%;
+}
+
 #search-form {
 	text-align: left;
 	position: relative;
 	top: -100px;
 	left: 590px;
-}
-
-#search-button {
-
 }

@@ -1,6 +1,7 @@
-iframe {
-	width: 90%;
+#iframe-wrapper {
 	text-align: center;
 	margin: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
 	opacity:0.9;
 }
