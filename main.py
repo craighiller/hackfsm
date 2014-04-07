@@ -77,8 +77,7 @@ class SearchHandler(webapp2.RequestHandler):
             q = appendToQuery(q, '-fsmTeiUrl:[* TO *]')
         if not self.request.get("image"):
             q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
-        #if not self.request.get("video"):
-        #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
+
         template_values = {}
         start = self.request.get("start", -1)
         rowsPerPage = 30
