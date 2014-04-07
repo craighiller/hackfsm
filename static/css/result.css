@@ -33,8 +33,9 @@ h3 {
 #article {
 	background-color: white;
 	padding: 6%;
+	font-size: 120%;
 }
 
-img {
+#image {
 	text-align: center;
 }

@@ -23,7 +23,9 @@
       <div id="article">
       {{content}}
       {% if picture_link %}
-        <img src={{picture_link}} style="max-height:100%" />
+        <div id="image">
+          <img src={{picture_link}} style="max-height:100%" />
+        </div>
       {% else %}
       {% endif %}
       </div>
