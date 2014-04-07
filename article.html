@@ -5,34 +5,29 @@
   <link rel="stylesheet" href="static/css/bootstrap.css">
   <link rel="stylesheet" href="static/css/custom.css">
   <link rel="stylesheet" href="static/css/result.css">
-  <link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
+  <link href ='http://fonts.googleapis.com/css?family=Oswald|Roboto' rel='stylesheet' type='text/css'>
 </head>
 <script type="text/javascript">
 
 </script>
 <body>
-  {% include "header.html"%}
-  <div id="result-detail">
-    <table>
-      <th>HEADER</th>
-      <th>CONTENT</th>
-      {% for key in results %}
-        <tr>
-          <td>{{key}}</td>
-          <td>{{" ".join(results[key])}}</td>
-        </tr>
-      {% endfor %}
-    </table>
+  {% include "header.html" %}
+  <div id="type">
+      {{results.fsmTypeOfResource[0]}}
   </div>
+  <div id="result-wrapper">
+    <div id="result">
+      <h2>{{"; ".join(results.fsmTitle)}}</h2>
+      <h3>{{"; ".join(results.fsmCreator)}}</h3>
 
-  <div id="article">
-    {% if picture_link %}
-      <h2>PICTURE</h2>
-      <img src={{picture_link}} style="max-height:100%" />
-    {% else %}
-      <h2>{{results.fsmTitle[0]}}</h2>
+      <div id="article">
       {{content}}
-    {% endif %}
+      {% if picture_link %}
+        <img src={{picture_link}} style="max-height:100%" />
+      {% else %}
+      {% endif %}
+      </div>
+    </div>
   </div>
 </body>
 </html>
