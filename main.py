@@ -78,7 +78,13 @@ class SearchHandler(webapp2.RequestHandler):
             q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
         #if not self.request.get("video"):
         #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
-        self.response.out.write(query(q))
+        results = query(q)
+        template_values = {}
+        template = jinja_environment.get_template("search.html")
+        template_values["header"] = results["responseHeader"]
+        template_values["query"] = results["responseHeader"]["params"]["q"]
+        template_values["response"] = results["response"]["docs"]
+        self.response.out.write(template.render(template_values))
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
@@ -102,7 +108,9 @@ class ArticleHandler(webapp2.RequestHandler):
             tei_to_html_tags["list"] = "ol"
             tei_to_html_tags["pb"] = "br"
             def dump(e):
-                if e.tag in tei_to_html_tags:
+                if e.tag in ['lb', 'salute', 'signed']:
+                    tag_to_use = 'br'
+                elif e.tag in tei_to_html_tags:
                     tag_to_use = tei_to_html_tags[e.tag]
                 else:
                     tag_to_use = e.tag
@@ -111,7 +119,10 @@ class ArticleHandler(webapp2.RequestHandler):
                     ret_val += e.text
                 for n in e:
                     ret_val += dump(n)
-                ret_val += '</%s>' % tag_to_use
+                if e.tag == 'signed':
+                    ret_val += '<br><br>'
+                elif not e.tag in ['lb', 'dateline', 'salute']:
+                    ret_val += '</%s>' % tag_to_use
                 if e.tail:
                     ret_val += e.tail
                 return ret_val
