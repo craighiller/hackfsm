@@ -95,16 +95,23 @@ class ArticleHandler(webapp2.RequestHandler):
         else:
             teiUrl = info["fsmTeiUrl"][-1]
             r = urlfetch.fetch(teiUrl).content
-            #dom = parse(r)
             xml = et.fromstring(r)
             text = xml.findall("text")[0]
+            tei_to_html_tags = {}
+            tei_to_html_tags["item"] = "li"
+            tei_to_html_tags["list"] = "ol"
+            tei_to_html_tags["pb"] = "br"
             def dump(e):
-                ret_val =  '<%s>' % e.tag
+                if e.tag in tei_to_html_tags:
+                    tag_to_use = tei_to_html_tags[e.tag]
+                else:
+                    tag_to_use = e.tag
+                ret_val =  '<%s>' % tag_to_use
                 if e.text:
                     ret_val += e.text
                 for n in e:
                     ret_val += dump(n)
-                ret_val += '</%s>' % e.tag
+                ret_val += '</%s>' % tag_to_use
                 if e.tail:
                     ret_val += e.tail
                 return ret_val
