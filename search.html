@@ -6,6 +6,11 @@
 </head>
 <body>
   <h1>Search Results for {{query}}</h1>
+  <h2>{{startRange}} - {{endRange}}</h2>
+  <br>
+  {% for elem in range(numPages) %}
+    <a href={{"/search?%s&start=%s" % (queryParameters, elem + 1)}}>{{elem + 1}}</a>
+  {% endfor %}
   <table>
     <th>fsmTitle</th>
     <th>fsmRelatedTitle</th>
