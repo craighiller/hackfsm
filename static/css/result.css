@@ -9,6 +9,17 @@ h3 {
 	margin-top: 1%;
 }
 
+#type {
+	width: 200px;
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	font-size: 150%;
+	padding: 1%;
+	margin-left: 10%;
+	margin-top: 5%;
+	text-transform:uppercase;
+}
+
 #result-wrapper {
 	margin-left: 10%;
 	margin-right: 10%;
@@ -17,16 +28,6 @@ h3 {
 #result {
 	background-color: rgba(255,255,255,0.4);
 	padding: 4%;
-}
-
-#type {
-	width: 200px;
-	background-color: rgba(0,0,0,0.8);
-	color: white;
-	font-size: 150%;
-	padding: 1%;
-	margin-left: 10%;
-	margin-top: 5%;
 }
 
 #article {
