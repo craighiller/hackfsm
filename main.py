@@ -78,7 +78,13 @@ class SearchHandler(webapp2.RequestHandler):
             q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
         #if not self.request.get("video"):
         #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
-        self.response.out.write(query(q))
+        results = query(q)
+        template_values = {}
+        template = jinja_environment.get_template("search.html")
+        template_values["header"] = results["responseHeader"]
+        template_values["query"] = results["responseHeader"]["params"]["q"]
+        template_values["response"] = results["response"]["docs"]
+        self.response.out.write(template.render(template_values))
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
