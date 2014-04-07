@@ -3,28 +3,36 @@
 <head>
   <title>Free Speech Movement Archive</title>
   <link rel="stylesheet" href="static/css/bootstrap.css">
-  <link rel="stylesheet" href="static/css/tei.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/result.css">
+  <link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
 </head>
 <script type="text/javascript">
 
 </script>
 <body>
-  <table>
-    <th>HEADER</th>
-    <th>CONTENT</th>
-    {% for key in results %}
-      <tr>
-        <td>{{key}}</td>
-        <td>{{" ".join(results[key])}}</td>
-      </tr>
-    {% endfor %}
-  </table>
-  {% if picture_link %}
-    <h1>PICTURE</h1>
-    <img src={{picture_link}} style="max-height:100%" />
-  {% else %}
-    <h1>ARTICLE</h1>
-    {{content}}
-  {% endif %}
+  {% include "header.html"%}
+  <div id="result-detail">
+    <table>
+      <th>HEADER</th>
+      <th>CONTENT</th>
+      {% for key in results %}
+        <tr>
+          <td>{{key}}</td>
+          <td>{{" ".join(results[key])}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div id="article">
+    {% if picture_link %}
+      <h2>PICTURE</h2>
+      <img src={{picture_link}} style="max-height:100%" />
+    {% else %}
+      <h2>{{results.fsmTitle[0]}}</h2>
+      {{content}}
+    {% endif %}
+  </div>
 </body>
 </html>

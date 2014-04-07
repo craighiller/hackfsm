@@ -5,21 +5,13 @@
 	<link rel="stylesheet" href="static/css/bootstrap.css">
 	<link rel="stylesheet" href="static/css/custom.css">
 	<link rel="stylesheet" href="static/css/home.css">
-	<link href='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
+	<link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
 </head>
 <script type="text/javascript">
 
 </script>
 <body>
-	<div id="header">
-		<div id="icon"><h1> FREE SPEECH MOVEMENT DIGITAL ARCHIVE</h1></div>
-		<form id="search-form" action="/search" method="post">
-			<input type="search" name="search" placeholder="Enter your keyword..."><button type="submit" class="btn btn-default">Search the Archive!</button>
-			<input type="checkbox" name="text" value="text" checked>Text 
-			<input type="checkbox" name="image" value="image" checked>Image 
-			<input type="checkbox" name="video" value="video" checked>Video <br>
-		</form>
-	</div>
+	{% include "header.html" %}
 	<center>
 		<iframe src="http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0AgsTsRYqkaypdFRPaDY0ZDFmZEZfN0tkT04yU0oxMVE&font=Bevan-PotanoSans&maptype=toner&lang=en&height=650" width='100%' height='650' frameborder='0'></iframe>
 	</center>
