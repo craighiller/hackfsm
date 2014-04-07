@@ -30,10 +30,10 @@ from environment_variables import *
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
-def query(q, fl="id"):
+def query(q, start="0"):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
-                          #'fl':fl,
+                          'start':start,
                           'wt':'python',
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY})
@@ -71,7 +71,7 @@ class MainHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
 class SearchHandler(webapp2.RequestHandler):
-    def post(self):
+    def get(self):
         q = self.request.get("search")
         if not self.request.get("text"):
             q = appendToQuery(q, '-fsmTeiUrl:[* TO *]')
@@ -79,11 +79,26 @@ class SearchHandler(webapp2.RequestHandler):
             q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
         #if not self.request.get("video"):
         #    q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
-        results = query(q)
         template_values = {}
+        start = self.request.get("start", -1)
+        rowsPerPage = 30
+        if start == -1:
+            template_values["queryParameters"] = self.request.query_string + "&start=1"
+            start = 1
+        else:
+            template_values["queryParameters"] = self.request.query_string
+        start = int(start) - 1
+        startRow = start*rowsPerPage
+        template_values["startRange"] = start*rowsPerPage
+        template_values["endRange"] = (start+1)*rowsPerPage
+
+        template_values["queryParameters"] = "&".join(template_values["queryParameters"].split('&')[:-1])
+
+        results = query(q, startRow)
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
         template_values["query"] = cgi.escape(results["responseHeader"]["params"]["q"])
+        template_values["numPages"] = results["response"]["numFound"] // 30 + 1
         template_values["response"] = results["response"]["docs"]
         self.response.out.write(template.render(template_values))
 
