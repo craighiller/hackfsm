@@ -38,17 +38,21 @@
           <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" /></a>
         {% else %}
 
-          {{doc["fsmTypeOfResource"]}}
+          <div id="result">
 
-          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
-          {% if doc["fsmRelatedTitle"] %}
-            ({{doc["fsmRelatedTitle"][0]}})
-          {% endif %}
-          
-          <p>SNIPPET</p>
-          <span>#matches: 0</span> <span>#citations: 0</span>
+            {{doc["fsmTypeOfResource"]}}
+
+            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+            {% if doc["fsmRelatedTitle"] %}
+              ({{doc["fsmRelatedTitle"][0]}})
+            {% endif %}
+            <br>A short snippet that contains the keywords</br>
+            <span>#matches: 0</span> <span>#citations: 0</span>
+
+          </div>
+
         {% endif %}
-      </p>
+      
 
 
 
