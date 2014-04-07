@@ -22,6 +22,7 @@ from google.appengine.api import urlfetch
 import urllib
 import urlparse
 from xml.etree import ElementTree as et
+from xml.dom.minidom import parse
 
 from environment_variables import *
  
@@ -94,8 +95,9 @@ class ArticleHandler(webapp2.RequestHandler):
         else:
             teiUrl = info["fsmTeiUrl"][-1]
             r = urlfetch.fetch(teiUrl).content
+            #dom = parse(r)
             xml = et.fromstring(r)
-            text = xml.getElementsByTagName("text")[0]
+            text = xml.findall("text")[0]
             def dump(e):
                 ret_val =  '<%s>' % e.tag
                 if e.text:
