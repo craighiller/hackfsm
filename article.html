@@ -17,16 +17,33 @@
   </div>
   <div id="result-wrapper">
     <div id="result">
-      <h2>{{"; ".join(results.fsmTitle)}}</h2>
-      <h3>{{"; ".join(results.fsmCreator)}}</h3>
+      <p>Cite This!</p>
 
+    
       <div id="article">
-      {{content}}
       {% if picture_link %}
+        {% if results.fsmRelatedTitle %}
+          <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
+        {% endif %}
+
+        {% if results.fsmCreator %}
+          <h3>{{"; ".join(results.fsmCreator)}}</h3>
+        {% endif %}
+
         <div id="image">
           <img src={{picture_link}} style="max-height:100%" />
+          <p>{{"; ".join(results.fsmTitle)}}</p>
         </div>
+
       {% else %}
+        <h2>{{"; ".join(results.fsmTitle)}}</h2>
+
+        {% if results.fsmCreator %}
+          <h3>{{"; ".join(results.fsmCreator)}}</h3>
+        {% endif %}
+
+        {{content}}
+
       {% endif %}
       </div>
     </div>

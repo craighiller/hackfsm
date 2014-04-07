@@ -16,7 +16,6 @@ h1 {
 	font-family: Oswald;
 	text-align: left;
 	line-height: 120%;
-	z-index: 2;
 	margin-left: 20px;
 	margin-top: 40px;
 	padding-top: 10px;
@@ -33,16 +32,14 @@ h1 {
 	font-size: 1.3em;
 	height: 150px;
 	background-color: rgba(255,255,255,0.8);
-	z-index: -1;
 }
 
 #header input {
 	margin: 10px;
 }
 
-#header input[type=checkbox] {
-	width:25px; 
-	height:25px; 
+#header input[type="search"] {
+	width:30%;
 }
 
 button {
@@ -52,6 +49,6 @@ button {
 #search-form {
 	text-align: left;
 	position: relative;
-	top: -100px;
+	top: -120px;
 	left: 590px;
 }

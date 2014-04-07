@@ -3,30 +3,59 @@
 <head>
   <title>Free Speech Movement Archive</title>
   <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/search.css">
+  <link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
 </head>
 <body>
   {% include "header.html" %}
-  <h1>Search Results for {{query}}</h1>
-  <h2>{{startRange}} - {{endRange}}</h2>
-  <br>
-  {% for elem in range(numPages) %}
-    <a href={{"/search?%s&start=%s" % (queryParameters, elem + 1)}}>{{elem + 1}}</a>
-  {% endfor %}
-  <table>
-    <th>fsmTitle</th>
-    <th>fsmRelatedTitle</th>
-    <th>fsmTypeOfResource</th>
-    <th>fsmDateCreated</th>
-    <th>fsmCreator</th>
+  <h3>Search Results for: {{query}} <br>
+  Sort By:
+  </h3>
+
+
+  <div id="result-wrapper">
+    
+    <!--<table>
+      <th>fsmTitle</th>
+      <th>fsmRelatedTitle</th>
+      <th>fsmTypeOfResource</th>
+      <th>fsmDateCreated</th>
+      <th>fsmCreator</th>
+      {% for doc in response %}
+        <tr>
+          <td><a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a></td>
+          <td>{{doc["fsmRelatedTitle"]}}</td>
+          <td>{{doc["fsmTypeOfResource"]}}</td>
+          <td>{{doc["fsmDateCreated"]}}</td>
+          <td>{{doc["fsmCreator"]}}</td>
+        </tr>
+      {% endfor %}
+    </table>-->
     {% for doc in response %}
-      <tr>
-        <td><a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"]}}</a></td>
-        <td>{{doc["fsmRelatedTitle"]}}</td>
-        <td>{{doc["fsmTypeOfResource"]}}</td>
-        <td>{{doc["fsmDateCreated"]}}</td>
-        <td>{{doc["fsmCreator"]}}</td>
-      </tr>
+        {% if doc["fsmImageUrl"] %}
+          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
+          <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" /></a>
+        {% else %}
+
+          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+          {% if doc["fsmRelatedTitle"] %}
+            ({{doc["fsmRelatedTitle"][0]}})
+          {% endif %}
+        {% endif %}
+      </p>
+
+
+
     {% endfor %}
-  </table>
+
+
+  <div id="result-wrapper">
+
+  <h3>
+    {% for elem in range(numPages) %}
+      <a href={{"/search?%s&start=%s" % (queryParameters, elem + 1)}}>{{elem + 1}}</a>
+    {% endfor %}
+  </h3>
 </body>
 </html>
