@@ -34,11 +34,13 @@
     </table>-->
     {% for doc in response %}
         {% if doc["fsmImageUrl"] %}
-          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-          <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" /></a>
+          <div class="image">
+            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
+            <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/><br>{{doc["fsmTitle"][0]}}</a>
+          </div>
         {% else %}
 
-          <div id="result">
+          <div class="result">
 
             {{doc["fsmTypeOfResource"]}}
 
@@ -59,7 +61,7 @@
     {% endfor %}
 
 
-  <div id="result-wrapper">
+  </div>
 
   <h3>
     {% for elem in range(numPages) %}
