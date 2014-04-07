@@ -38,10 +38,15 @@
           <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" /></a>
         {% else %}
 
+          {{doc["fsmTypeOfResource"]}}
+
           <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
           {% if doc["fsmRelatedTitle"] %}
             ({{doc["fsmRelatedTitle"][0]}})
           {% endif %}
+          
+          <p>SNIPPET</p>
+          <span>#matches: 0</span> <span>#citations: 0</span>
         {% endif %}
       </p>
 
