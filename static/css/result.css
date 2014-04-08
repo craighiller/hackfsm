@@ -36,6 +36,11 @@ h3 {
 	font-size: 120%;
 }
 
+#article a {
+	text-align: right;
+	display: block;
+}
+
 #image {
 	text-align: center;
 }

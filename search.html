@@ -13,9 +13,7 @@
   Sort By:
   </h2>
 
-
   <div id="result-wrapper">
-    
     <!--<table>
       <th>fsmTitle</th>
       <th>fsmRelatedTitle</th>
@@ -24,9 +22,6 @@
       <th>fsmCreator</th>
       {% for doc in response %}
         <tr>
-          <td><a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a></td>
-          <td>{{doc["fsmRelatedTitle"]}}</td>
-          <td>{{doc["fsmTypeOfResource"]}}</td>
           <td>{{doc["fsmDateCreated"]}}</td>
           <td>{{doc["fsmCreator"]}}</td>
         </tr>

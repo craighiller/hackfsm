@@ -17,10 +17,10 @@
   </div>
   <div id="result-wrapper">
     <div id="result">
-      <p>Cite This!</p>
 
-    
       <div id="article">
+      <a href="">Cite This!</a>
+
       {% if picture_link %}
         {% if results.fsmRelatedTitle %}
           <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
@@ -42,7 +42,7 @@
           <h3>{{"; ".join(results.fsmCreator)}}</h3>
         {% endif %}
 
-        {{content}}
+        <p>{{content}}</p>
 
       {% endif %}
       </div>
