@@ -24,6 +24,7 @@ import urlparse
 from xml.etree import ElementTree as et
 from xml.dom.minidom import parse
 import cgi
+import json
 
 from environment_variables import *
  
@@ -150,10 +151,42 @@ class ArticleHandler(webapp2.RequestHandler):
         template_values['results'] = info
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
+
+class SnippetHandler(webapp2.RequestHandler):
+    def get(self):
+        myId = self.request.get("id")
+        query = self.request.get("query")
+        myId = escapeAndFixId(myId)
+        info = eval(find(myId))
+        info = info["response"]["docs"][0] # get the first doc (should only be one)
+        teiUrl = info["fsmTeiUrl"][-1]
+        r = urlfetch.fetch(teiUrl).content
+        xml = et.fromstring(r)
+
+        targets = []
+
+        def acquireTargets(e):
+            if e.text and e.text.find(query) != -1:
+                targets.append(e.text)
+            for n in e:
+                acquireTargets(n)
+
+        acquireTargets(xml)
+
+        self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
+
+        if len(targets) != 0:
+            target = targets[0]
+            target = target.replace(query, "<mark>" + query + "</mark>")
+            myResponse = {'snippet': target, 'matches':len(targets), 'id':self.request.get("id")}
+            self.response.out.write(json.dumps(myResponse))
+        else:
+            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'id':self.request.get("id")}))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/search', SearchHandler),
-    ('/article', ArticleHandler)
+    ('/article', ArticleHandler),
+    ('/find_snippets', SnippetHandler)
 ], debug=True)
 
