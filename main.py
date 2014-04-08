@@ -25,6 +25,7 @@ from xml.etree import ElementTree as et
 from xml.dom.minidom import parse
 import cgi
 import json
+import re
 
 from environment_variables import *
  
@@ -165,8 +166,10 @@ class SnippetHandler(webapp2.RequestHandler):
 
         targets = []
 
+        queryLower = query.lower()
+
         def acquireTargets(e):
-            if e.text and e.text.find(query) != -1:
+            if e.text and e.text.lower().find(queryLower) != -1:
                 targets.append(e.text)
             for n in e:
                 acquireTargets(n)
@@ -177,8 +180,8 @@ class SnippetHandler(webapp2.RequestHandler):
 
         if len(targets) != 0:
             target = targets[0]
-            target = target.replace(query, "<mark>" + query + "</mark>")
-            myResponse = {'snippet': target, 'matches':len(targets), 'id':self.request.get("id")}
+            subbedTarget = re.sub(query, "<mark>" + query + "</mark>", target,flags=re.IGNORECASE)
+            myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'id':self.request.get("id")}
             self.response.out.write(json.dumps(myResponse))
         else:
             self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'id':self.request.get("id")}))

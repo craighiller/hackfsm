@@ -64,9 +64,6 @@
 <script>
   $(document).ready(function(){
     $('.snippet').each(function(i, obj) {
-      if (i != 0) {
-        return;
-      }
       $.ajax({
         url: '/find_snippets',
         type: 'GET',
