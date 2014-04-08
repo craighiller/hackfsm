@@ -12,13 +12,11 @@
 
 <body>
   {% include "header.html" %}
-  <h3>Search Results for: {{query}} <br>
+  <h2>Search Results for: {{query}} <br>
   Sort By:
-  </h3>
-
+  </h2>
 
   <div id="result-wrapper">
-    
     <!--<table>
       <th>fsmTitle</th>
       <th>fsmRelatedTitle</th>
@@ -27,39 +25,33 @@
       <th>fsmCreator</th>
       {% for doc in response %}
         <tr>
-          <td><a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a></td>
-          <td>{{doc["fsmRelatedTitle"]}}</td>
-          <td>{{doc["fsmTypeOfResource"]}}</td>
           <td>{{doc["fsmDateCreated"]}}</td>
           <td>{{doc["fsmCreator"]}}</td>
         </tr>
       {% endfor %}
     </table>-->
-    {% for doc in response %}
-        {% if doc["fsmImageUrl"] %}
-          <div class="image">
-            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-            <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/><br>{{doc["fsmTitle"][0]}}</a>
-          </div>
-        {% else %}
+    {% if typeOfResource == "image" %}
+      {% for doc in response %}
+        <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
+        <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/></a>
+      {% endfor %}
 
+    {% else %}
+      {% for doc in response %}
+          {% if doc["fsmTypeOfResource"] %}
+                <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
+              {% endif %}
+          
           <div class="result">
-
-            {{doc["fsmTypeOfResource"]}}
-
-            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
-            {% if doc["fsmRelatedTitle"] %}
-              ({{doc["fsmRelatedTitle"][0]}})
-            {% endif %}
-            <p class=snippet id={{doc["id"]}}>A short snippet that contains the keywords</p>
-            <span id={{'snippet' + doc["id"].replace('.', '')}}>#matches: 0</span>
-
+              <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+              {% if doc["fsmRelatedTitle"] %}
+                ({{doc["fsmRelatedTitle"][0]}})
+              {% endif %}
+              <p class=snippet id={{doc["id"]}}>A short snippet that contains the keywords</p>
+              <span id={{'snippet' + doc["id"].replace('.', '')}}>#matches: 0</span>
           </div>
-
-        {% endif %}
-
-    {% endfor %}
-
+      {% endfor %}
+    {% endif %}
 
   </div>
 

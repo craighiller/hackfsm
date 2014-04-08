@@ -1,32 +1,65 @@
 h2, h3 {
-	text-align: center;
+	text-align: left;
 	background-color: white;
 	padding: 1%;
 	margin-left: 10%;
 	margin-right: 10%;
+	margin-top: 5%;
 }
 
 h3 {
+	text-align: center;
 	margin-bottom: 1%;
-	margin-top: 1%;
 	clear: both;
+	margin-top: 2%;
 }
 
 #result-wrapper {
 	margin-left: 10%;
 	margin-right: 10%;
-	background-color: white;
+	background-color: rgba(255,255,255,0.8);
+}
 
+
+img {
+    width: 19%;
+    height: 250px;
+    float: left;
+    border-style:solid;
+	border-width:4px;
+	border-color: rgba(0,0,0,0.5);
 }
 
 .result {
-	margin: 3%;
+	padding: 2%;
+	margin: 2%;
+	background-color: white;
 }
 
-.image {
-    width: 25%;
-    display: inline-block;
-    float: left;
-    text-align: center;
-    background-color: white;
+.type {
+	background-color: black;
+	color: white;
+	width: 150px;
+	float: right;
+	position: relative;
+	background-color: rgba(0,0,0,0.5);
+	padding: 1%;
+	text-transform:uppercase;
 }
+
+.type.letters {
+	background-color: blue;
+}
+
+.type.leaflets {
+	background-color: green;
+}
+
+.type.reports {
+	background-color: red;
+}
+
+.type.personal.statements {
+	background-color: yellow;
+}
+
