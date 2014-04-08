@@ -155,12 +155,8 @@ class ArticleHandler(webapp2.RequestHandler):
 
 class SnippetHandler(webapp2.RequestHandler):
     def get(self):
-        myId = self.request.get("id")
         query = self.request.get("query")
-        myId = escapeAndFixId(myId)
-        info = eval(find(myId))
-        info = info["response"]["docs"][0] # get the first doc (should only be one)
-        teiUrl = info["fsmTeiUrl"][-1]
+        teiUrl = self.request.get("fsmTeiUrl")
         r = urlfetch.fetch(teiUrl).content
         xml = et.fromstring(r)
 
@@ -168,23 +164,27 @@ class SnippetHandler(webapp2.RequestHandler):
 
         queryLower = query.lower()
 
+        text = xml.findall("text")[0]
+
         def acquireTargets(e):
             if e.text and e.text.lower().find(queryLower) != -1:
                 targets.append(e.text)
             for n in e:
                 acquireTargets(n)
+            if e.tail and e.tail.lower().find(queryLower) != -1:
+                targets.append(e.tail)
 
-        acquireTargets(xml)
+        acquireTargets(text)
 
         self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
 
         if len(targets) != 0:
             target = targets[0]
             subbedTarget = re.sub(query, "<mark>" + query + "</mark>", target,flags=re.IGNORECASE)
-            myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'id':self.request.get("id")}
+            myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'fsmTeiUrl':teiUrl}
             self.response.out.write(json.dumps(myResponse))
         else:
-            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'id':self.request.get("id")}))
+            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'fsmTeiUrl':teiUrl}))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
