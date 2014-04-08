@@ -15,18 +15,9 @@ h3 {
 #result-wrapper {
 	margin-left: 10%;
 	margin-right: 10%;
-	background-color: white;
-
+	background-color: rgba(255,255,255,0.8);
 }
 
 .result {
 	margin: 3%;
-}
-
-.image {
-    width: 25%;
-    display: inline-block;
-    float: left;
-    text-align: center;
-    background-color: white;
 }

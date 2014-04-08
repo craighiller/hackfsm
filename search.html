@@ -32,34 +32,20 @@
         </tr>
       {% endfor %}
     </table>-->
-    {% for doc in response %}
-        {% if doc["fsmImageUrl"] %}
-          <div class="image">
-            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-            <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/><br>{{doc["fsmTitle"][0]}}</a>
-          </div>
-        {% else %}
+      {% for doc in response %}
+            <div class="result">
 
-          <div class="result">
+              {{doc["fsmTypeOfResource"]}}
 
-            {{doc["fsmTypeOfResource"]}}
+              <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+              {% if doc["fsmRelatedTitle"] %}
+                ({{doc["fsmRelatedTitle"][0]}})
+              {% endif %}
+              <br>A short snippet that contains the keywords</br>
+              <span>#matches: 0</span> <span>#citations: 0</span>
 
-            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
-            {% if doc["fsmRelatedTitle"] %}
-              ({{doc["fsmRelatedTitle"][0]}})
-            {% endif %}
-            <br>A short snippet that contains the keywords</br>
-            <span>#matches: 0</span> <span>#citations: 0</span>
-
-          </div>
-
-        {% endif %}
-      
-
-
-
-    {% endfor %}
-
+            </div>
+      {% endfor %}
 
   </div>
 
