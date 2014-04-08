@@ -47,8 +47,8 @@
               {% if doc["fsmRelatedTitle"] %}
                 ({{doc["fsmRelatedTitle"][0]}})
               {% endif %}
-              <p class=snippet id={{doc["id"]}}>A short snippet that contains the keywords</p>
-              <span id={{'snippet' + doc["id"].replace('.', '')}}>#matches: 0</span>
+              <p class=snippet id={{doc["fsmTeiUrl"][0]}}>A short snippet that contains the keywords</p>
+              <span id={{'snippet' + doc["fsmTeiUrl"][0]}}>#matches: 0</span>
           </div>
       {% endfor %}
     {% endif %}
@@ -67,11 +67,11 @@
       $.ajax({
         url: '/find_snippets',
         type: 'GET',
-        data: {'id': obj.id, 'query': '{{query}}'},
+        data: {'fsmTeiUrl': obj.id, 'query': '{{query}}'},
         dataType: 'json',
         success: function(data, status){
           obj.innerHTML = data.snippet;
-          $('#snippet' + data.id.replace('.', ''))[0].innerHTML = "#matches: " + data.matches;
+          $('#snippet' + data.id)[0].innerHTML = "#matches: " + data.matches;
         }
       });
     });

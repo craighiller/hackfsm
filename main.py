@@ -155,12 +155,8 @@ class ArticleHandler(webapp2.RequestHandler):
 
 class SnippetHandler(webapp2.RequestHandler):
     def get(self):
-        myId = self.request.get("id")
         query = self.request.get("query")
-        myId = escapeAndFixId(myId)
-        info = eval(find(myId))
-        info = info["response"]["docs"][0] # get the first doc (should only be one)
-        teiUrl = info["fsmTeiUrl"][-1]
+        teiUrl = self.request.get("fsmTeiUrl")
         r = urlfetch.fetch(teiUrl).content
         xml = et.fromstring(r)
 
@@ -168,13 +164,17 @@ class SnippetHandler(webapp2.RequestHandler):
 
         queryLower = query.lower()
 
+        text = xml.findall("text")[0]
+
         def acquireTargets(e):
             if e.text and e.text.lower().find(queryLower) != -1:
                 targets.append(e.text)
             for n in e:
                 acquireTargets(n)
+            if e.tail and e.tail.lower().find(queryLower) != -1:
+                targets.append(e.tail)
 
-        acquireTargets(xml)
+        acquireTargets(text)
 
         self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
 
