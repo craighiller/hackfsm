@@ -12,18 +12,22 @@
 </script>
 <body>
   {% include "header.html" %}
-  <div id="type">
-      {{results.fsmTypeOfResource[0]}}
-  </div>
+  {% if results.fsmTypeOfResource %}
+    <div id="type">
+        {{results.fsmTypeOfResource[0]}}
+    </div>
+  {% endif %}
   <div id="result-wrapper">
     <div id="result">
 
       <div id="article">
       <a href="">Cite This!</a>
 
+      <p>{{results.DateCreated}}</p>
+
       {% if results.fsmRelatedTitle %}
-          <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
-        {% endif %}
+        <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
+      {% endif %}
 
       {% if picture_link %}
         {% if results.fsmCreator %}

@@ -30,14 +30,15 @@ img {
 	border-color: rgba(0,0,0,0.5);
 }
 
+#result a {
+	font-size: 150%;
+	background-color: white;
+}
+
 .result {
 	padding: 2%;
 	margin: 2%;
 	background-color: white;
-}
-
-.result a {
-	font-size: 150%;
 }
 
 .type {
@@ -59,7 +60,7 @@ img {
 	background-color: rgba(39,139,14,0.5);
 }
 
-.type.reports, .type.briefs, .type.transcripts, .type.progress, .type.minutes {
+.type.reports, .type.briefs, .type.transcripts, .type.minutes {
 	background-color: rgba(0,115,153,0.5);
 }
 
@@ -73,4 +74,9 @@ img {
 
 .type.magazines {
 	background-color: rgba(115,153,0,0.5);
+}
+
+.type.progress.reports {
+	color: black;
+	background-color: green;
 }
