@@ -36,6 +36,10 @@ img {
 	background-color: white;
 }
 
+.result a {
+	font-size: 150%;
+}
+
 .type {
 	background-color: black;
 	color: white;
@@ -48,14 +52,14 @@ img {
 }
 
 .type.letters {
-	background-color: rgba(0,38,153,0.5);
+	background-color: rgba(15,108,145,0.5);
 }
 
 .type.personal.statements, .type.oral.histories, .type.group.statements {
-	background-color: rgba(115,0,153,0.5);
+	background-color: rgba(39,139,14,0.5);
 }
 
-.type.reports, .type.briefs {
+.type.reports, .type.briefs, .type.transcripts, .type.progress, .type.minutes {
 	background-color: rgba(0,115,153,0.5);
 }
 
@@ -64,17 +68,9 @@ img {
 }
 
 .type.title.pages, .type.table.of.content, .type.leaflets {
-	background-color: rgba(255,196,20,0.5);
-}
-
-
-.type.transcripts, .type.progress.reports, .type.minutes {
-	background-color: rgba(0,153,115,0.5);
+	background-color: rgba(220,150,3,0.5);
 }
 
 .type.magazines {
 	background-color: rgba(115,153,0,0.5);
 }
-
-
-
