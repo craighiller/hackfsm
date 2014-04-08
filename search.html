@@ -9,13 +9,12 @@
 </head>
 <body>
   {% include "header.html" %}
-  <div id="result-wrapper">
   <h2>Search Results for: {{query}} <br>
   Sort By:
   </h2>
 
 
-  
+  <div id="result-wrapper">
     
     <!--<table>
       <th>fsmTitle</th>
@@ -56,13 +55,13 @@
       {% endfor %}
     {% endif %}
 
+  </div>
+
   <h3>
     {% for elem in range(numPages) %}
       <a href={{"/search?%s&start=%s" % (queryParameters, elem + 1)}}>{{elem + 1}}</a>
     {% endfor %}
   </h3>
-
-  </div>
 </body>
 <script>
   $(document).ready(function(){
