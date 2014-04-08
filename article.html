@@ -21,13 +21,13 @@
       <div id="article">
       <a href="">Cite This!</a>
 
-      {% if picture_link %}
-        {% if results.fsmRelatedTitle %}
+      {% if results.fsmRelatedTitle %}
           <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
         {% endif %}
 
+      {% if picture_link %}
         {% if results.fsmCreator %}
-          <h3>{{"; ".join(results.fsmCreator)}}</h3>
+          <i>{{"; ".join(results.fsmCreator)}}</i>
         {% endif %}
 
         <div id="image">
@@ -39,7 +39,7 @@
         <h2>{{"; ".join(results.fsmTitle)}}</h2>
 
         {% if results.fsmCreator %}
-          <h3>{{"; ".join(results.fsmCreator)}}</h3>
+          <i>{{"; ".join(results.fsmCreator)}}</i>
         {% endif %}
 
         <p>{{content}}</p>
