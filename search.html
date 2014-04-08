@@ -40,18 +40,18 @@
 
     {% else %}
       {% for doc in response %}
+          {% if doc["fsmTypeOfResource"] %}
+                <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
+              {% endif %}
+          
           <div class="result">
-
-              {{doc["fsmTypeOfResource"]}}
-
               <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
               {% if doc["fsmRelatedTitle"] %}
                 ({{doc["fsmRelatedTitle"][0]}})
               {% endif %}
               <p class=snipet id={{doc["id"]}}>A short snippet that contains the keywords</p>
               <span>#matches: 0</span> <span>#citations: 0</span>
-
-            </div>
+          </div>
       {% endfor %}
     {% endif %}
 
