@@ -181,10 +181,10 @@ class SnippetHandler(webapp2.RequestHandler):
         if len(targets) != 0:
             target = targets[0]
             subbedTarget = re.sub(query, "<mark>" + query + "</mark>", target,flags=re.IGNORECASE)
-            myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'id':self.request.get("id")}
+            myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'fsmTeiUrl':teiUrl}
             self.response.out.write(json.dumps(myResponse))
         else:
-            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'id':self.request.get("id")}))
+            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'fsmTeiUrl':teiUrl}))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

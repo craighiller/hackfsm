@@ -48,7 +48,7 @@
                 ({{doc["fsmRelatedTitle"][0]}})
               {% endif %}
               <p class=snippet id={{doc["fsmTeiUrl"][0]}}>A short snippet that contains the keywords</p>
-              <span id={{'snippet' + doc["fsmTeiUrl"][0]}}>#matches: 0</span>
+              <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
           </div>
       {% endfor %}
     {% endif %}
@@ -71,7 +71,7 @@
         dataType: 'json',
         success: function(data, status){
           obj.innerHTML = data.snippet;
-          $('#snippet' + data.id)[0].innerHTML = "#matches: " + data.matches;
+          $('#snippet' + data.fsmTeiUrl.replace(/[.:\/]/g, ''))[0].innerHTML = "#matches: " + data.matches;
         }
       });
     });
