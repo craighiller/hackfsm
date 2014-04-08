@@ -52,28 +52,28 @@ img {
 }
 
 .type.personal.statements, .type.oral.histories, .type.group.statements {
-	background-color: rgba(38,0,153,0.5);
+	background-color: rgba(115,0,153,0.5);
 }
 
 .type.reports, .type.briefs {
-	background-color: rgba(153,0,115,0.5);
+	background-color: rgba(0,115,153,0.5);
 }
 
 .type.newspapers, .type.articles, .type.news.bulletins, {
-	background-color: rgba(0,54,214,0.5);
+	background-color: rgba(153,0,38,0.5);
 }
 
 .type.title.pages, .type.table.of.content, .type.leaflets {
-	background-color: rgba(20,79,244,0.5);
+	background-color: rgba(255,196,20,0.5);
 }
 
 
 .type.transcripts, .type.progress.reports, .type.minutes {
-	background-color: rgba(255,196,20,0.5);
+	background-color: rgba(0,153,115,0.5);
 }
 
 .type.magazines {
-	background-color: rgba(214,161,0,0.5);
+	background-color: rgba(115,153,0,0.5);
 }
 
 
