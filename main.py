@@ -73,10 +73,11 @@ class MainHandler(webapp2.RequestHandler):
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("search")
-        if not self.request.get("text"):
-            q = appendToQuery(q, '-fsmTeiUrl:[* TO *]')
-        if not self.request.get("image"):
-            q = appendToQuery(q, '-fsmImageUrl:[* TO *]')
+        typeOfResource = self.request.get("type")
+        if typeOfResource == "image":
+            q = appendToQuery(q, '-fsmTeiUrl:[* TO *]') # don't show written text
+        else:
+            q = appendToQuery(q, '-fsmImageUrl:[* TO *]') # don't show images
 
         template_values = {}
         start = self.request.get("start", -1)
@@ -90,11 +91,13 @@ class SearchHandler(webapp2.RequestHandler):
         startRow = start*rowsPerPage
 
         template_values["queryParameters"] = "&".join(template_values["queryParameters"].split('&')[:-1])
+        template_values["typeOfResource"] = typeOfResource
 
         results = query(q, startRow)
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
-        template_values["query"] = cgi.escape(results["responseHeader"]["params"]["q"])
+        #template_values["query"] = cgi.escape(results["responseHeader"]["params"]["q"])
+        template_values["query"] = cgi.escape(self.request.get("search"))
         template_values["numPages"] = results["response"]["numFound"] // 30 + 1
         template_values["response"] = results["response"]["docs"]
         template_values["startRange"] = start*rowsPerPage
