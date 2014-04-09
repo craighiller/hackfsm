@@ -1,5 +1,15 @@
 import webapp2
-from helper import xmlToHTML
+import jinja2
+import os
+import logging
+
+from google.appengine.api import urlfetch
+from xml.etree import ElementTree as et
+
+from helper import *
+
+jinja_environment = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
@@ -16,10 +26,6 @@ class ArticleHandler(webapp2.RequestHandler):
             r = urlfetch.fetch(teiUrl).content
             xml = et.fromstring(r)
             text = xml.findall("text")[0]
-            tei_to_html_tags = {}
-            tei_to_html_tags["item"] = "li"
-            tei_to_html_tags["list"] = "ol"
-            tei_to_html_tags["pb"] = "br"
 
             template_values['content'] = xmlToHTML(text)
         template_values['results'] = info

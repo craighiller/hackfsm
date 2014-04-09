@@ -22,8 +22,6 @@ import logging
 from searchHandler import SearchHandler
 from articleHandler import ArticleHandler
 from snippetHandler import SnippetHandler
-
-from environment_variables import *
  
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))

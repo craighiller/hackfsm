@@ -1,3 +1,7 @@
+from google.appengine.api import urlfetch
+import urllib
+from environment_variables import *
+
 def query(q, start="0"):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
@@ -31,6 +35,12 @@ def appendToQuery(q, elem):
     if q == '':
         return elem
     return q + ' AND ' + elem
+
+tei_to_html_tags = {
+    "item":"li",
+    "list":"ol",
+    "pb":"br"
+}
 
 def xmlToHTML(e):
     if e.tag in ['lb', 'salute', 'signed']:
