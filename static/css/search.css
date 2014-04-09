@@ -80,3 +80,7 @@ img {
 	color: black;
 	background-color: green;
 }
+
+.snippet {
+	border-left: 1px;
+}

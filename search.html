@@ -47,7 +47,8 @@
               {% if doc["fsmRelatedTitle"] %}
                 ({{doc["fsmRelatedTitle"][0]}})
               {% endif %}
-              <p class=snippet id={{doc["fsmTeiUrl"][0]}}>A short snippet that contains the keywords</p>
+              <br><i>{{"; ".join(doc["fsmCreator"])}}</i>
+              <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
               <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
           </div>
       {% endfor %}
