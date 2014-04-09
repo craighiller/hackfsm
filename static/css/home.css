@@ -5,3 +5,7 @@
 	padding-right: 5%;
 	opacity:0.9;
 }
+
+#filter {
+	display: none;
+}

@@ -11,14 +11,11 @@ body {
 
 
 h1 {
-	font-size: 300%;
+	font-size: 400%;
 	color: white;
 	font-family: Oswald;
 	text-align: left;
 	line-height: 120%;
-	margin-left: 20px;
-	margin-top: 40px;
-	padding-top: 10px;
 }
 
 label {
@@ -29,9 +26,18 @@ label {
 	display: none;
 }
 
+#header {
+	box-shadow: 5px 5px 5px #707070;
+	height: 150px;
+	background-color: rgba(255,255,255,0.8);
+	margin-top: 4%;
+}
+
 #icon {
-	width: 580px;
+	width: 40%;
 	background-color: rgba(0,0,0,0.8);
+	float: left;
+	padding-left: 1.5%;
 	height: 150px;
 }
 
@@ -39,28 +45,22 @@ label {
 	text-decoration: none;
 }
 
-#header {
-	box-shadow: 5px 5px 5px #707070;
-	font-size: 1.3em;
-	height: 150px;
-	background-color: rgba(255,255,255,0.8);
+#search {
+	padding-top: 3%;
+	padding-left: 1%;
 }
 
-#header input {
-	margin: 10px;
+#search-form input {
+	margin: 1%;
 }
 
-#header input[type="search"] {
-	width:30%;
-}
-
-#search-form {
-	text-align: left;
-	position: relative;
-	top: -120px;
-	left: 590px;
+#search-form input[type="search"] {
+	width:50%;
 }
 
 #filter {
-	width: 100px;
+	width: 120px;
+	float: right;
+	background-color: white;
+	margin-top: 4%;
 }

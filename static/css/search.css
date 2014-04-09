@@ -2,22 +2,19 @@ h2, h3 {
 	text-align: left;
 	background-color: white;
 	padding: 1%;
-	margin-left: 10%;
 	margin-right: 10%;
-	margin-top: 5%;
+	margin-top: 4%;
 }
 
 h3 {
 	text-align: center;
-	margin-bottom: 1%;
 	clear: both;
-	margin-top: 2%;
+	
 }
 
 #result-wrapper {
-	margin-left: 10%;
 	margin-right: 10%;
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.5);
 }
 
 
@@ -30,14 +27,15 @@ img {
 	border-color: rgba(0,0,0,0.5);
 }
 
-#result a {
-	font-size: 150%;
+.result {
+	padding: 2%;
+	margin: 4%;
 	background-color: white;
 }
 
-.result {
-	padding: 2%;
-	margin: 2%;
+
+#result a {
+	font-size: 150%;
 	background-color: white;
 }
 
