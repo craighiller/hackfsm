@@ -23,6 +23,7 @@ class ArticleHandler(webapp2.RequestHandler):
             template_values['picture_link'] = image_link
         else:
             teiUrl = info["fsmTeiUrl"][-1]
+            del info['fsmTeiUrl']
             r = urlfetch.fetch(teiUrl).content
             xml = et.fromstring(r)
             text = xml.findall("text")[0]

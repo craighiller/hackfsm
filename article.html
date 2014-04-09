@@ -38,11 +38,9 @@
           <p>{{content}}</p>
         {% endif %}
 
+
+
         <div id="more">
-          <p>More about this source</p>
-          {% for key in results.keys() %}
-            <b>{{key[3:]}}: </b>{{results[key]}}
-          {% endfor %}
           <script type="text/javascript">
           /* <![CDATA[ */ 
              EBcitation = {
@@ -56,6 +54,11 @@
              document.write(unescape("%3Cscript src='http://media.easybib.com/citethis/"+EBversion+"/widget_mini.js' type='text/javascript'%3E%3C/script%3E"));
           /* ]]> */
           </script>
+
+          
+          {% for key in results.keys() %}
+            <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
+          {% endfor %}
         </div>
       </div>
     </div>
