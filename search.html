@@ -14,6 +14,7 @@
   {% include "header.html" %}
   <h2>Search Results for: {{query}} <br>
   Sort By:
+  {{types}}
   </h2>
 
   <div id="result-wrapper">
@@ -26,8 +27,8 @@
     {% else %}
       {% for doc in response %}
           {% if doc["fsmTypeOfResource"] %}
-                <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
-              {% endif %}
+            <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
+          {% endif %}
           
           <div class="result">
               <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>

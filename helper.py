@@ -2,6 +2,17 @@ from google.appengine.api import urlfetch
 import urllib
 from environment_variables import *
 
+def queryPluck(q, fl='fsmTypeOfResource', start="0"):
+    BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
+                          'start':start,
+                          'wt':'python',
+                          'app_id':FSM_APP_ID,
+                          'app_key':FSM_APP_KEY,
+                          'fl':fl})
+    result = urlfetch.fetch(url)
+    return eval(result.content)
+
 def query(q, start="0"):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,

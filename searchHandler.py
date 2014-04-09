@@ -3,7 +3,7 @@ import jinja2
 import os
 import logging
 
-from helper import appendToQuery, query
+from helper import appendToQuery, query, queryPluck
 from xml.etree import ElementTree as et
 
 jinja_environment = jinja2.Environment(
@@ -35,6 +35,8 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["typeOfResource"] = typeOfResource
 
         results = query(q, startRow)
+        hi = queryPluck(q, 'fsmTypeOfResource', startRow)['response']['docs']
+        template_values['types'] = hi
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
         template_values["query"] = cgi.escape(self.request.get("search"))
