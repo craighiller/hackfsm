@@ -38,7 +38,11 @@ class SearchHandler(webapp2.RequestHandler):
                 q = appendToQuery(q, '-fsmTypeOfResource:' + " OR -fsmTypeOfResource:".join(exclusion))
         else: 
             # only collect what is checked
-            q = appendToQuery(q, '(fsmTypeOfResource:' + " OR fsmTypeOfResource:".join(filter) + ')')
+            if len(filter) != 0:
+                q = appendToQuery(q, 'fsmTypeOfResource:' + " OR fsmTypeOfResource:".join(filter))
+            else:
+                # nothing checked, check all
+                filter = typesOfResourcesDict.keys()
 
         template_values = {}
         start = self.request.get("start", -1)
