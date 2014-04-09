@@ -7,6 +7,7 @@ h2, h3 {
 h3 {
 	text-align: center;
 	clear: both;
+	margin: 3%;
 	
 }
 
@@ -75,7 +76,7 @@ img {
 
 #text-result {
 	margin-right: 15%;
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(0,0,0,0.5);
 }
 
 #img-result {

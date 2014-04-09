@@ -18,9 +18,9 @@
     </div>
 
     <div id="filter">
-        <h4>Filter by:</h4>
+        <p class="small-title">Filter by:</p>
         {% for key in types %}
-            <label><input type="checkbox" name="filter" value={{key}} checked="true"> {{key}} <br></label>
+            <label><input type="checkbox" name="filter" value="{{key}}" checked="true"> {{key}} ({{types[key]}}) <br></label>
         {% endfor %}
     </div>
 </form>
