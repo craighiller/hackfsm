@@ -184,7 +184,16 @@ class SnippetHandler(webapp2.RequestHandler):
             myResponse = {'snippet':subbedTarget, 'matches':len(targets), 'fsmTeiUrl':teiUrl}
             self.response.out.write(json.dumps(myResponse))
         else:
-            self.response.out.write(json.dumps({'snippet': 'none', 'matches':0, 'fsmTeiUrl':teiUrl}))
+            something = []
+            def acquireSomething(e):
+                if len(something):
+                    return
+                if e.text and len(e.text.strip()) > 20:
+                    something.append(e.text)
+                for n in e:
+                    acquireSomething(n)
+            acquireSomething(text)
+            self.response.out.write(json.dumps({'snippet': something[0], 'matches':0, 'fsmTeiUrl':teiUrl}))
       
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
