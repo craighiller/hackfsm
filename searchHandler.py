@@ -20,6 +20,26 @@ class SearchHandler(webapp2.RequestHandler):
         else:
             q = appendToQuery(q, '-fsmImageUrl:[* TO *]') # don't show images
 
+        typesOfResourcesList = queryPluck(q)['facet_counts']['facet_fields']['fsmTypeOfResource']
+        typesOfResourcesDict = {'other':0}
+        assert len(typesOfResourcesList) % 2 == 0
+        for i in xrange(0, len(typesOfResourcesList), 2):
+            if i >= 10:
+                typesOfResourcesDict['other'] += typesOfResourcesList[i+1]
+            else:
+                typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
+
+        filter = self.request.get_all("filter")
+        if 'other' in filter: 
+            # exclude what is not in the filter
+            exclusion = set(typesOfResourcesDict.keys()) - set(filter)
+            exclusion - set('other')
+            if len(exclusion) != 0:
+                q = appendToQuery(q, '-fsmTypeOfResource:' + " OR -fsmTypeOfResource:".join(exclusion))
+        else: 
+            # only collect what is checked
+            q = appendToQuery(q, '(fsmTypeOfResource:' + " OR fsmTypeOfResource:".join(filter) + ')')
+
         template_values = {}
         start = self.request.get("start", -1)
         rowsPerPage = 30
@@ -35,15 +55,9 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["typeOfResource"] = typeOfResource
 
         results = query(q, startRow)
-        typesOfResourcesList = queryPluck(q, 'fsmTypeOfResource', startRow)['facet_counts']['facet_fields']['fsmTypeOfResource']
-        typesOfResourcesDict = {'other':0}
-        assert len(typesOfResourcesList) % 2 == 0
-        for i in xrange(0, len(typesOfResourcesList), 2):
-            if i >= 10:
-                typesOfResourcesDict['other'] += typesOfResourcesList[i+1]
-            else:
-                typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
+
         template_values['types'] = typesOfResourcesDict
+        template_values['filter'] = filter
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
         template_values["query"] = cgi.escape(self.request.get("search"))

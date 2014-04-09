@@ -20,7 +20,10 @@
     <div id="filter">
         <p class="small-title">Filter by:</p>
         {% for key in types %}
-            <label><input type="checkbox" name="filter" value="{{key}}" checked="true"> {{key}} ({{types[key]}}) <br></label>
+            <label><input type="checkbox" name="filter" value="{{key}}" 
+                {% if key in filter %}
+                    checked="true"
+                {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
         {% endfor %}
     </div>
 </form>
