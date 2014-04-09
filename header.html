@@ -8,5 +8,10 @@
     		{% if typeOfResource == "image" %}
     			checked="true"
     		{% endif %}>Image
+        <div id="filter">
+            {% for key in types %}
+                <input type="checkbox" name="filter" value={{key}}> {{key}}
+            {% endfor %}
+        </div>
     </form>
 </div>
