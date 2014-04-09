@@ -2,18 +2,20 @@
     <div id="icon"><a href="/"><h1> FREE SPEECH MOVEMENT DIGITAL ARCHIVE </h1></a></div>
     <form id="search-form" action="/search" method="get">
         <fieldset><legend></legend>
-            <label>
-                <input type="search" name="search" placeholder="Enter your keyword..." value='{{query}}'> 
-            </label>
-            <button type="submit" class="btn btn-inverse btn-lg">Search the Archive!</button><br>
-            <label><input type="radio" name="type" value="text" checked="true"}}>Text</label>
-            <label><input type="radio" name="type" value="image" 
-            	{% if typeOfResource == "image" %}
-            		checked="true"
-            	{% endif %}>Image</label>
-            <div id="filter">
+            <div id="search">
+                <label>
+                    <input type="search" name="search" placeholder="Enter your keyword..." value='{{query}}'> 
+                </label>
+                <button type="submit" class="btn btn-inverse btn-lg">Search the Archive!</button><br>
+                <label><input type="radio" name="type" value="text" checked="true"}}>Text</label>
+                <label><input type="radio" name="type" value="image" 
+                	{% if typeOfResource == "image" %}
+                		checked="true"
+                	{% endif %}>Image</label>
+            </div>
+            <div id="filter" class="hidden">
                 {% for key in types %}
-                    <input type="checkbox" name="filter" value={{key}}> {{key}}
+                    <input type="checkbox" name="filter" value={{key}}> {{key}} <br>
                 {% endfor %}
             </div>
     	</fieldset>
