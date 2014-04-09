@@ -20,7 +20,7 @@
     <div id="filter">
         <h4>Filter by:</h4>
         {% for key in types %}
-            <input type="checkbox" name="filter" value={{key}}> {{key}} <br>
+            <label><input type="checkbox" name="filter" value={{key}}> {{key}} <br></label>
         {% endfor %}
     </div>
 </form>

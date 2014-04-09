@@ -7,11 +7,12 @@ html, body{
 body {
 	background: url(/static/background.jpg) fixed; 
   	background-size: cover;
+  	background-repeat: no-repeat;
 }
 
 
 h1 {
-	font-size: 400%;
+	font-size: 56px;
 	color: white;
 	font-family: Oswald;
 	text-align: left;
@@ -34,7 +35,7 @@ label {
 }
 
 #icon {
-	width: 40%;
+	width: 580px;
 	background-color: rgba(0,0,0,0.8);
 	float: left;
 	padding-left: 1.5%;
