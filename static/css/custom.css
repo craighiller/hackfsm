@@ -36,7 +36,7 @@ label {
 	box-shadow: 5px 5px 5px #707070;
 	height: 155px;
 	background-color: rgba(255,255,255,0.8);
-	margin-top: 4%;
+	margin-top: 3%;
 }
 
 #icon {
@@ -74,6 +74,6 @@ label {
 	width: 12%;
 	float: right;
 	background-color: white;
-	margin-top: 4%;
+	margin-top: 3%;
 	display: none;
 }
