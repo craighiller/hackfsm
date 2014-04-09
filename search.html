@@ -17,19 +17,6 @@
   </h2>
 
   <div id="result-wrapper">
-    <!--<table>
-      <th>fsmTitle</th>
-      <th>fsmRelatedTitle</th>
-      <th>fsmTypeOfResource</th>
-      <th>fsmDateCreated</th>
-      <th>fsmCreator</th>
-      {% for doc in response %}
-        <tr>
-          <td>{{doc["fsmDateCreated"]}}</td>
-          <td>{{doc["fsmCreator"]}}</td>
-        </tr>
-      {% endfor %}
-    </table>-->
     {% if typeOfResource == "image" %}
       {% for doc in response %}
         <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
@@ -47,7 +34,7 @@
               {% if doc["fsmRelatedTitle"] %}
                 ({{doc["fsmRelatedTitle"][0]}})
               {% endif %}
-              <br><i>{{"; ".join(doc["fsmCreator"])}}</i>
+              &mdash; <i>{{"; ".join(doc["fsmCreator"])}}</i>
               <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
               <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
           </div>

@@ -23,16 +23,10 @@
       <div id="article">
 
         <p>{{"; ".join(results.fsmDateCreated)}}</p>
-
-        {% if results.fsmRelatedTitle %}
-          <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
-        {% endif %}
+        <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
 
         {% if picture_link %}
-          {% if results.fsmCreator %}
-            <i>{{"; ".join(results.fsmCreator)}}</i>
-          {% endif %}
-
+          <i>{{"; ".join(results.fsmCreator)}}</i>
           <div id="image">
             <img src={{picture_link}} style="max-height:100%" />
             <p>{{"; ".join(results.fsmTitle)}}</p>
@@ -40,20 +34,11 @@
 
         {% else %}
           <h2>{{"; ".join(results.fsmTitle)}}</h2>
-
-          {% if results.fsmCreator %}
-            <i>{{"; ".join(results.fsmCreator)}}</i>
-          {% endif %}
-
+          <i>{{"; ".join(results.fsmCreator)}}</i>
           <p>{{content}}</p>
-
         {% endif %}
 
         <div id="more">
-          <p>More about this source</p>
-          {% if results.fsmPhysicalLocation %}
-            <b>Physical Location:</b>"; ".join({{results.fsmPhysicalLocation}})
-          {% endif %}
           <script type="text/javascript">
           /* <![CDATA[ */ 
              EBcitation = {
