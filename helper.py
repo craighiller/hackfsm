@@ -22,7 +22,6 @@ def query(q, start="0"):
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY})
     result = urlfetch.fetch(url)
-    print(url)
     return eval(result.content)
 
 def find(id):
