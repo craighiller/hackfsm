@@ -54,10 +54,6 @@
           {% for key in results.keys() %}
             <b>{{key[3:]}}: </b>{{results[key]}}
           {% endfor %}
-          <a href="">Cite This!</a>
-          {% if results.fsmPhysicalLocation %}
-            <b>Physical Location:</b>"; ".join({{results.fsmPhysicalLocation}})
-          {% endif %}
           <script type="text/javascript">
           /* <![CDATA[ */ 
              EBcitation = {
