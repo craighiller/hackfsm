@@ -26,9 +26,9 @@
           
           <div class="result">
               <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
-              {% if {{doc["fsmRelatedTitle"]}} %}
+              {% if doc["fsmRelatedTitle"] %}
                 ({{"; ".join(doc["fsmRelatedTitle"])}})
-              {% elseif %}
+              {% endif %}
               &mdash; <i>{{"; ".join(doc["fsmCreator"])}}</i>
               <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
               <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
