@@ -13,6 +13,7 @@ def queryPluck(q, fl='fsmTypeOfResource', start="0"):
                           'facet.field':'fsmTypeOfResource',
                           'facet.mincount':1})
     result = urlfetch.fetch(url)
+    print(url)
     return eval(result.content)
 
 def query(q, start="0"):
