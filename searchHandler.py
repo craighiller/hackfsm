@@ -35,11 +35,12 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["typeOfResource"] = typeOfResource
 
         results = query(q, startRow)
-        typesOfResourcesDict = queryPluck(q, 'fsmTypeOfResource', startRow)['response']['docs']
-        typesOfResourcesSet = set(value for i in range(len(typesOfResourcesDict)) for key, values in typesOfResourcesDict[i].iteritems() for value in values)
-        if 'still image' in typesOfResourcesSet:
-            typesOfResourcesSet.remove('still image')
-        template_values['types'] = typesOfResourcesSet
+        typesOfResourcesList = queryPluck(q, 'fsmTypeOfResource', startRow)['facet_counts']['facet_fields']['fsmTypeOfResource']
+        typesOfResourcesDict = {}
+        assert len(typesOfResourcesList) % 2 == 0
+        for i in xrange(0, len(typesOfResourcesList), 2):
+            typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
+        template_values['types'] = typesOfResourcesDict
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
         template_values["query"] = cgi.escape(self.request.get("search"))

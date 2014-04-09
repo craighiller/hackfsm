@@ -9,8 +9,11 @@ def queryPluck(q, fl='fsmTypeOfResource', start="0"):
                           'wt':'python',
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY,
-                          'fl':fl})
+                          'facet':'true',
+                          'facet.field':'fsmTypeOfResource',
+                          'facet.mincount':1})
     result = urlfetch.fetch(url)
+    print(url)
     return eval(result.content)
 
 def query(q, start="0"):
