@@ -59,8 +59,9 @@ label {
 }
 
 #filter {
-	width: 120px;
+	width: 12%;
 	float: right;
 	background-color: white;
 	margin-top: 4%;
+	display: none;
 }

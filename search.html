@@ -13,30 +13,32 @@
 <body>
   {% include "header.html" %}
   <h2>Search Results for: {{query}}</h2>
-  <div id="result-wrapper">
+  
     {% if typeOfResource == "image" %}
-      {% for doc in response %}
-        <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-        <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/></a>
-      {% endfor %}
+      <div id="img-result">
+        {% for doc in response %}
+          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
+          <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%"/></a>
+        {% endfor %}
+      </div>
 
     {% else %}
-      {% for doc in response %}
-          <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
-          
-          <div class="result">
-              <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
-              {% if doc["fsmRelatedTitle"] %}
-                ({{"; ".join(doc["fsmRelatedTitle"])}})
-              {% endif %}
-              &mdash; <i>{{"; ".join(doc["fsmCreator"])}}</i>
-              <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
-              <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
-          </div>
-      {% endfor %}
+      <div id="text-result">
+        {% for doc in response %}
+            <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
+            
+            <div class="result">
+                <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+                {% if doc["fsmRelatedTitle"] %}
+                  ({{"; ".join(doc["fsmRelatedTitle"])}})
+                {% endif %}
+                &mdash; <i>{{"; ".join(doc["fsmCreator"])}}</i>
+                <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
+                <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
+            </div>
+        {% endfor %}
+      </div>
     {% endif %}
-
-  </div>
 
   <h3>
     {% for elem in range(numPages) %}
@@ -58,6 +60,15 @@
         }
       });
     });
+
+    if ($("#img-result").length == 0) {
+      $("#filter").show();
+      $("h2").css({"margin-right": "15%"});
+      $("h3").css({"margin-right": "15%"});
+    }
+    else if ($("#img-result").length == 0) {
+      
+    }
   });
 </script>
 </html>
