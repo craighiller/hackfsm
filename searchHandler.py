@@ -36,10 +36,13 @@ class SearchHandler(webapp2.RequestHandler):
 
         results = query(q, startRow)
         typesOfResourcesList = queryPluck(q, 'fsmTypeOfResource', startRow)['facet_counts']['facet_fields']['fsmTypeOfResource']
-        typesOfResourcesDict = {}
+        typesOfResourcesDict = {'other':0}
         assert len(typesOfResourcesList) % 2 == 0
         for i in xrange(0, len(typesOfResourcesList), 2):
-            typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
+            if i >= 10:
+                typesOfResourcesDict['other'] += typesOfResourcesList[i+1]
+            else:
+                typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
         template_values['types'] = typesOfResourcesDict
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
