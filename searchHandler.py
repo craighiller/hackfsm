@@ -1,6 +1,13 @@
 import webapp2
-from helper import appendToQuery
+import jinja2
+import os
+import logging
+
+from helper import appendToQuery, query
 from xml.etree import ElementTree as et
+
+jinja_environment = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 import cgi
 
