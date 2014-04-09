@@ -22,7 +22,7 @@
 
       <div id="article">
 
-        <p>{{results.DateCreated}}</p>
+        <p>{{"; ".join(results.fsmDateCreated)}}</p>
 
         {% if results.fsmRelatedTitle %}
           <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
@@ -54,7 +54,19 @@
           {% if results.fsmPhysicalLocation %}
             <b>Physical Location:</b>"; ".join({{results.fsmPhysicalLocation}})
           {% endif %}
-          <a href="">Cite This!</a>
+          <script type="text/javascript">
+          /* <![CDATA[ */ 
+             EBcitation = {
+                 "page":"{{"; ".join(results.fsmTitle)}}",
+                 "site":"Free Speech Movement Archive",
+                 "url":document.URL,
+                 "date":"{{"; ".join(results.fsmDateCreated)}}",
+                 "authors":"{{"; ".join(results.fsmCreator)}}"
+             };
+             EBversion  = "1.0";
+             document.write(unescape("%3Cscript src='http://media.easybib.com/citethis/"+EBversion+"/widget_mini.js' type='text/javascript'%3E%3C/script%3E"));
+          /* ]]> */
+          </script>
         </div>
       </div>
     </div>
