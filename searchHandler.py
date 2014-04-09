@@ -35,7 +35,8 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["typeOfResource"] = typeOfResource
 
         results = query(q, startRow)
-        hi = queryPluck(q, 'fsmTypeOfResource', startRow)['response']['docs']
+        x = queryPluck(q, 'fsmTypeOfResource', startRow)['response']['docs']
+        hi = set(value for i in range(len(x)) for key, values in x[i].iteritems() for value in values)
         template_values['types'] = hi
         template = jinja_environment.get_template("search.html")
         template_values["header"] = results["responseHeader"]
