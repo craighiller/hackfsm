@@ -51,9 +51,9 @@
 
         <div id="more">
           <p>More about this source</p>
-          {% if results.fsmPhysicalLocation %}
-            <b>Physical Location:</b>"; ".join({{results.fsmPhysicalLocation}})
-          {% endif %}
+          {% for key in results.keys() %}
+            <b>{{key[3:]}}: </b>{{results[key]}}
+          {% endfor %}
           <a href="">Cite This!</a>
         </div>
       </div>
