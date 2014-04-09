@@ -26,7 +26,7 @@
         <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
 
         {% if picture_link %}
-          <i>{{"; ".join(results.fsmCreator)}}</i>
+          <i>{{"; ".join(results.fsmCreator)}}</i></br>
           <div id="image">
             <img src={{picture_link}} style="max-height:100%" />
             <p>{{"; ".join(results.fsmTitle)}}</p>
@@ -34,11 +34,9 @@
 
         {% else %}
           <h2>{{"; ".join(results.fsmTitle)}}</h2>
-          <i>{{"; ".join(results.fsmCreator)}}</i>
+          <i>{{"; ".join(results.fsmCreator)}}</i><br>
           <p>{{content}}</p>
         {% endif %}
-
-
 
         <div id="more">
           <script type="text/javascript">
@@ -55,7 +53,6 @@
           /* ]]> */
           </script>
 
-          
           {% for key in results.keys() %}
             <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
           {% endfor %}

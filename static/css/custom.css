@@ -21,6 +21,14 @@ h1 {
 	padding-top: 10px;
 }
 
+label {
+	display: inline;
+}
+
+.hidden {
+	display: none;
+}
+
 #icon {
 	width: 580px;
 	background-color: rgba(0,0,0,0.8);
@@ -44,10 +52,6 @@ h1 {
 
 #header input[type="search"] {
 	width:30%;
-}
-
-button {
-	margin-left: 1.5%;
 }
 
 #search-form {
