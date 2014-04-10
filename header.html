@@ -1,38 +1,38 @@
 <form id="search-form" action="/search" method="get">
     <div id="header">
         <div id="icon"><a href="/"><h1> FREE SPEECH MOVEMENT DIGITAL ARCHIVE </h1></a></div>
-            <fieldset><legend></legend>
-                <div id="search">
-                    <label><span class="hidden"> Search </span>
-                        <input type="search" name="search" placeholder="Enter your keyword..." value='{{query}}'> 
-                    </label>
-                    <button type="submit" class="btn btn-inverse btn-lg">Search the Archive!</button><br>
-                    <label><input type="radio" name="type" value="text" checked="true"}}>Text</label>
-                    <label><input type="radio" name="type" value="image" 
-                    	{% if typeOfResource == "image" %}
-                    		checked="true"
-                    	{% endif %}>Image</label>
-                </div>
-        	</fieldset>
-        
+        <fieldset><legend></legend>
+            <div id="search">
+                <label><span class="hidden"> Search </span>
+                    <input type="search" name="search" placeholder="Enter your keyword..." value='{{query}}'> 
+                </label>
+                <button type="submit" class="btn btn-inverse btn-lg">Search the Archive!</button><br>
+                <label><input type="radio" name="type" value="text" checked="true"}}>Text</label>
+                <label><input type="radio" name="type" value="image" 
+                	{% if typeOfResource == "image" %}
+                		checked="true"
+                	{% endif %}>Image</label>
+            </div>
+    	</fieldset>
     </div>
 
     {% if types %}
     <div id="filter">
-        <p class="small-title">Filter by:</p>
-        {% for key in types %}
-            {% if key != "other" %}
-                <label><input type="checkbox" name="filter" value="{{key}}" 
-                    {% if key in filter %}     
-                        checked="true"
-                    {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
-            {% endif %}
-        {% endfor %}
+        <fieldset><legend> Filter by: </legend>
+            {% for key in types %}
+                {% if key != "other" %}
+                    <label><input type="checkbox" name="filter" value="{{key}}" 
+                        {% if key in filter %}     
+                            checked="true"
+                        {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
+                {% endif %}
+            {% endfor %}
 
-        <label><input type="checkbox" name="filter" value="other" 
-            {% if "other" in filter %}     
-                checked="true"
-            {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+            <label><input type="checkbox" name="filter" value="other" 
+                {% if "other" in filter %}     
+                    checked="true"
+                {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+        </fieldset>
     </div>
     {% endif %}
 </form>

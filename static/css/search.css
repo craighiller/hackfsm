@@ -20,6 +20,10 @@ img {
 	border-color: rgba(0,0,0,0.5);
 }
 
+legend {
+	margin-bottom: 0px;
+}
+
 .result {
 	padding: 2%;
 	margin: 3%;
@@ -45,7 +49,7 @@ img {
 	background-color: rgba(28,99,10,0.8);
 }
 
-.type.reports, .type.briefs, .type.transcripts, .type.minutes, .type.progress.reports {
+.type.reports, .type.briefs, .type.transcripts, .type.minutes, .type.pro.rep {
 	background-color: rgba(0,64,85,0.8);
 }
 
