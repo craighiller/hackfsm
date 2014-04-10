@@ -23,6 +23,7 @@ img {
 .result {
 	padding: 2%;
 	margin: 3%;
+	margin-right: 0%;
 	background-color: white;
 }
 
@@ -68,8 +69,19 @@ img {
 	border-left: 1px;
 }
 
+.link {
+	font-size: 140%;
+	color: rgb(0, 0, 119);
+}
+
 #filter {
 	display: none;
+	padding: 1%;
+	width: 10%;
+	float: right;
+	background-color: rgba(255,255,255,0.8);
+	margin-top: 3%;
+	box-shadow: 5px 5px 5px #707070;
 }
 
 #text-result {
@@ -82,9 +94,4 @@ img {
 	padding-right: 5%;
 	padding-top: 3%;
 	text-align: center;
-}
-
-.link {
-	font-size: 140%;
-	color: rgb(0, 0, 119);
 }

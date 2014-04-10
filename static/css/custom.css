@@ -71,9 +71,5 @@ label {
 }
 
 #filter {
-	width: 12%;
-	float: right;
-	background-color: white;
-	margin-top: 3%;
 	display: none;
 }
