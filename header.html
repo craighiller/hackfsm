@@ -17,6 +17,7 @@
         
     </div>
 
+    {% if types %}
     <div id="filter">
         <p class="small-title">Filter by:</p>
         {% for key in types %}
@@ -33,4 +34,5 @@
                 checked="true"
             {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
     </div>
+    {% endif %}
 </form>
