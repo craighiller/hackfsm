@@ -26,7 +26,11 @@
       <div id="text-result">
         {% for doc in response %}
             {% for t in doc["fsmTypeOfResource"] %}
-              <span class='type {{t}}'> {{t}} </span>
+              {% if "progress reports" not in t %}
+                <span class='type {{t}}'> {{t}} </span>
+              {% else %}
+                <span class='type pro rep'> progress reports </span>
+              {% endif %}
             {% endfor %}
             
             <div class="result">
