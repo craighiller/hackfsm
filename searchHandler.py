@@ -64,6 +64,6 @@ class SearchHandler(webapp2.RequestHandler):
         template_values['filterType'] = filterType
         template = jinja_environment.get_template("search.html")
         template_values["query"] = cgi.escape(self.request.get("search"))
-        template_values["numPages"] = results["response"]["numFound"] // 15 + 1
+        template_values["numPages"] = results["response"]["numFound"] // rowsPerPage + 1
         template_values["response"] = results["response"]["docs"]
         self.response.out.write(template.render(template_values))
