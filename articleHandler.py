@@ -32,3 +32,4 @@ class ArticleHandler(webapp2.RequestHandler):
         template_values['results'] = info
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
+        

@@ -1,6 +1,7 @@
 from google.appengine.api import urlfetch
 import urllib
 from environment_variables import *
+import json
 
 def queryPluck(q):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
@@ -43,7 +44,15 @@ def escapeAndFixId(id):
     splitted.pop()
     return ''.join(splitted)
 
-
+def popup(q, collection):
+    BASE_URL = "https://www.popuparchive.com:443/api/search?"
+    url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
+        'query':q,
+        'filters[collection_id]':collection
+    })
+    result = urlfetch.fetch(url)
+    j = json.loads(result.content)
+    return (j)
 def appendToQuery(q, elem):
     if q == '':
         return elem
