@@ -29,24 +29,24 @@ class SearchHandler(webapp2.RequestHandler):
             else:
                 typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
-        filter = self.request.get_all("filter")
-        if 'other' in filter: 
-            # exclude what is not in the filter
-            exclusion = set(typesOfResourcesDict.keys()) - set(filter)
+        filterType = self.request.get_all("filterType")
+        if 'other' in filterType: 
+            # exclude what is not in the filterType
+            exclusion = set(typesOfResourcesDict.keys()) - set(filterType)
             exclusion - set('other')
             if len(exclusion) != 0:
                 q = appendToQuery(q, '-fsmTypeOfResource:' + " OR -fsmTypeOfResource:".join(exclusion))
         else: 
             # only collect what is checked
-            if len(filter) != 0:
-                q = appendToQuery(q, 'fsmTypeOfResource:' + " OR fsmTypeOfResource:".join(filter))
+            if len(filterType) != 0:
+                q = appendToQuery(q, 'fsmTypeOfResource:' + " OR fsmTypeOfResource:".join(filterType))
             else:
                 # nothing checked, check all
-                filter = typesOfResourcesDict.keys()
+                filterType = typesOfResourcesDict.keys()
 
         template_values = {}
         start = self.request.get("start", -1)
-        rowsPerPage = 30
+        rowsPerPage = 15
         if start == -1:
             template_values["queryParameters"] = self.request.query_string + "&start=1"
             start = 1
@@ -61,10 +61,9 @@ class SearchHandler(webapp2.RequestHandler):
         results = query(q, startRow)
 
         template_values['types'] = typesOfResourcesDict
-        template_values['filter'] = filter
+        template_values['filterType'] = filterType
         template = jinja_environment.get_template("search.html")
-        template_values["header"] = results["responseHeader"]
         template_values["query"] = cgi.escape(self.request.get("search"))
-        template_values["numPages"] = results["response"]["numFound"] // 30 + 1
+        template_values["numPages"] = results["response"]["numFound"] // 15 + 1
         template_values["response"] = results["response"]["docs"]
         self.response.out.write(template.render(template_values))
