@@ -21,6 +21,7 @@ h1 {
 
 label {
 	display: inline;
+	text-transform: capitalize;
 }
 
 .hidden {
@@ -52,7 +53,7 @@ label {
 }
 
 #search {
-	padding-top: 3%;
+	padding-top: 5%;
 	padding-left: 1%;
 }
 
@@ -68,6 +69,8 @@ label {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 15px;
+	text-transform: uppercase;
+	color: red;
 }
 
 #filter {

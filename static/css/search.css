@@ -20,6 +20,10 @@ img {
 	border-color: rgba(0,0,0,0.5);
 }
 
+legend {
+	margin-bottom: 0px;
+}
+
 .result {
 	padding: 2%;
 	margin: 3%;
