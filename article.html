@@ -19,16 +19,16 @@
   {% endif %}
   <div id="result-wrapper">
     <div id="result">
-
       <div id="article">
-
         <p>{{"; ".join(results.fsmDateCreated)}}</p>
-        <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
+        {% if results.fsmRelatedTitle %}
+          <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
+        {% endif %}
 
         {% if picture_link %}
           <i>{{"; ".join(results.fsmCreator)}}</i></br>
           <div id="image">
-            <img src={{picture_link}} style="max-height:100%" />
+            <img src={{picture_link}} style="max-height:100%" alt={{"; ".join(results.fsmTitle)}}/>
             <p>{{"; ".join(results.fsmTitle)}}</p>
           </div>
 

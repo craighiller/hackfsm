@@ -74,6 +74,10 @@ legend {
 	color: rgb(0, 0, 119);
 }
 
+#search {
+	padding-top: 5%;
+}
+
 #filter {
 	display: none;
 	padding: 1%;
