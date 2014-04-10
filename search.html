@@ -25,7 +25,9 @@
     {% else %}
       <div id="text-result">
         {% for doc in response %}
-            <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
+            {% for t in doc["fsmTypeOfResource"] %}
+              <span class='type ' + {{t}}> {{t}} </span>
+            {% endfor %}
             
             <div class="result">
                 <a class="link" href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
