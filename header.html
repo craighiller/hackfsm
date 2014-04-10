@@ -23,7 +23,7 @@
             {% for key in types %}
                 {% if key != "other" %}
                     <label><input type="checkbox" name="filter" value="{{key}}" 
-                        {% if key in filter %}     
+                        {% if key in filterType %}     
                             checked="true"
                         {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
                 {% endif %}
