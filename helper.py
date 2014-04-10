@@ -15,15 +15,15 @@ def queryPluck(q):
     result = urlfetch.fetch(url)
     return eval(result.content)
 
-def query(q, start="0"):
+def query(q, start="0", rowsPerPage="30"):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
                           'start':start,
                           'wt':'python',
                           'app_id':FSM_APP_ID,
-                          'app_key':FSM_APP_KEY})
+                          'app_key':FSM_APP_KEY,
+                          'rows':rowsPerPage})
     result = urlfetch.fetch(url)
-    print(url)
     return eval(result.content)
 
 def find(id):

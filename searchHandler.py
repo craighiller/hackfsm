@@ -46,24 +46,27 @@ class SearchHandler(webapp2.RequestHandler):
 
         template_values = {}
         start = self.request.get("start", -1)
-        rowsPerPage = 15
         if start == -1:
-            template_values["queryParameters"] = self.request.query_string + "&start=1"
+            # first time visiting the page
+            # we need query parameters so that the page links at the bottom of search will look right
+            template_values["queryParameters"] = self.request.query_string
             start = 1
         else:
-            template_values["queryParameters"] = self.request.query_string
+            # parse off last query parameter which will be &start=??
+            template_values["queryParameters"] = "&".join(self.request.query_string.split('&')[:-1])
+
         start = int(start) - 1
+        rowsPerPage = 15
         startRow = start*rowsPerPage
 
-        template_values["queryParameters"] = "&".join(template_values["queryParameters"].split('&')[:-1])
         template_values["typeOfResource"] = typeOfResource
 
-        results = query(q, startRow)
+        results = query(q, startRow, rowsPerPage)
 
         template_values['types'] = typesOfResourcesDict
         template_values['filterType'] = filterType
         template = jinja_environment.get_template("search.html")
         template_values["query"] = cgi.escape(self.request.get("search"))
-        template_values["numPages"] = results["response"]["numFound"] // 15 + 1
+        template_values["numPages"] = results["response"]["numFound"] // rowsPerPage + 1
         template_values["response"] = results["response"]["docs"]
         self.response.out.write(template.render(template_values))
