@@ -15,15 +15,15 @@ def queryPluck(q):
     result = urlfetch.fetch(url)
     return eval(result.content)
 
-def query(q, start="0"):
+def query(q, start="0", rowsPerPage="30"):
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
                           'start':start,
                           'wt':'python',
                           'app_id':FSM_APP_ID,
-                          'app_key':FSM_APP_KEY})
+                          'app_key':FSM_APP_KEY,
+                          'rows':rowsPerPage})
     result = urlfetch.fetch(url)
-    print(url)
     return eval(result.content)
 
 def find(id):
@@ -53,6 +53,15 @@ def popup(q, collection):
     result = urlfetch.fetch(url)
     j = json.loads(result.content)
     return (j)
+    
+def getTranscript(item_id, audio_id):
+    BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"
+    url = BASE_URL.format(item_id = item_id, audio_file_id = audio_id)
+    print url
+    result = urlfetch.fetch(url)
+    j = json.loads(result.content)
+    return j
+    
 def appendToQuery(q, elem):
     if q == '':
         return elem

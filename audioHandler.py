@@ -18,9 +18,14 @@ class AudioHandler(webapp2.RequestHandler):
         x=popup(q, int(collection))['results']
         for i in x:
             #self.response.out.write(i.keys())
+            #self.response.out.write("Identifier: "+ str(i['identifier'])+"</br></br>")
+            
             for n in range(len(i['audio_files'])):
                 self.response.out.write("<a href='"+i['audio_files'][n]['url']+"'>"+ i['title']+"</a>")
+                self.response.out.write("</br>"+"ID: "+ str(i['id'])+"</br>")
+                self.response.out.write("Audio ID: "+ str(i['audio_files'][n]['id']))
                 self.response.out.write("</br>")
+                self.response.out.write("Transcript: </br>"+str(getTranscript(i['id'],i['audio_files'][n]['id'] )))
             
             self.response.out.write(i['description'])
             
