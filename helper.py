@@ -4,6 +4,11 @@ from environment_variables import *
 import json
 
 def queryPluck(q):
+    """
+    Generate a facet for fsmTypeOfResource. This allows us to get
+    a list of type and count in the 'facet_count' field
+    Returns a python dictionary
+    """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
                           'wt':'python',
@@ -16,6 +21,10 @@ def queryPluck(q):
     return eval(result.content)
 
 def query(q, start="0", rowsPerPage="30"):
+    """
+    Helper to send and evaluate queries to FSM archive
+    Returns a python dictionary
+    """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
                           'start':start,
@@ -27,22 +36,17 @@ def query(q, start="0", rowsPerPage="30"):
     return eval(result.content)
 
 def find(id):
+    """
+    Helper to find a single article in the FSM article by id
+    Returns a python dictionary
+    """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
     url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':'id:' + id,
         'wt':'json',
         'app_id':FSM_APP_ID,
         'app_key':FSM_APP_KEY})
     result = urlfetch.fetch(url)
-    return result.content
-
-def escapeAndFixId(id):
-    id = id.replace(':', '\:')
-    splitted = id.split(' ')
-    if len(splitted) == 1:
-        return id
-    splitted[-2] = splitted[-2] + ' ' + splitted[-1]
-    splitted.pop()
-    return ''.join(splitted)
+    return eval(result.content)
 
 def popup(q, collection):
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
@@ -63,6 +67,10 @@ def getTranscript(item_id, audio_id):
     return j
     
 def appendToQuery(q, elem):
+    """
+    Helper to extend a query.  Should have an AND condition between
+    if not the first part of the query
+    """
     if q == '':
         return elem
     return q + ' AND ' + elem
@@ -74,6 +82,11 @@ tei_to_html_tags = {
 }
 
 def xmlToHTML(e):
+    """
+    Converts a XML tree to an approximate HTML tree.
+    Works in conjunction with tei_to_html_tags
+    to convert tags that don't exist in HTML
+    """
     if e.tag in ['lb', 'salute', 'signed']:
         tag_to_use = 'br'
     elif e.tag in tei_to_html_tags:

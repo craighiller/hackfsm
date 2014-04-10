@@ -13,9 +13,9 @@ jinja_environment = jinja2.Environment(
 
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
-        myId = escapeAndFixId(self.request.get("id"))
-        info = eval(find(myId))["response"]["docs"][0] # get the first doc (should only be one)
-        del info['id'] # don't display id
+        myId = self.request.get("id").replace(':', '\:') # escape the colon metacharacter
+        info = find(myId)["response"]["docs"][0] # get the first doc (should only be one)
+        del info['id'] # del keys so we don't display them at the bottom
         template_values = {}
         if "fsmImageUrl" in info:
             image_link = info["fsmImageUrl"][-1]
@@ -26,9 +26,9 @@ class ArticleHandler(webapp2.RequestHandler):
             del info['fsmTeiUrl']
             r = urlfetch.fetch(teiUrl).content
             xml = et.fromstring(r)
-            text = xml.findall("text")[0]
-
+            text = xml.findall("text")[0] # ignore the TEI header, only get content
             template_values['content'] = xmlToHTML(text)
+
         template_values['results'] = info
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
