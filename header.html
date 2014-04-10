@@ -30,7 +30,7 @@
             {% endfor %}
 
             <label><input type="checkbox" name="filter" value="other" 
-                {% if "other" in filter %}     
+                {% if "other" in filterType %}     
                     checked="true"
                 {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
         </fieldset>
