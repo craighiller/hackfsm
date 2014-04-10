@@ -22,14 +22,14 @@
             <p class="small-title">Filter by:</p>
             {% for key in types %}
                 {% if key != "other" %}
-                    <label><input type="checkbox" name="filter" value="{{key}}" 
+                    <label><input type="checkbox" name="filterType" value="{{key}}" 
                         {% if key in filterType %}     
                             checked="true"
                         {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
                 {% endif %}
             {% endfor %}
 
-            <label><input type="checkbox" name="filter" value="other" 
+            <label><input type="checkbox" name="filterType" value="other" 
                 {% if "other" in filterType %}     
                     checked="true"
                 {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>

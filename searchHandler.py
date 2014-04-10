@@ -46,6 +46,8 @@ class SearchHandler(webapp2.RequestHandler):
 
         template_values = {}
         start = self.request.get("start", -1)
+        print(self.request.query_string)
+        print(start)
         if start == -1:
             # first time visiting the page
             # we need query parameters so that the page links at the bottom of search will look right
@@ -54,6 +56,8 @@ class SearchHandler(webapp2.RequestHandler):
         else:
             # parse off last query parameter which will be &start=??
             template_values["queryParameters"] = "&".join(self.request.query_string.split('&')[:-1])
+        print(template_values["queryParameters"])
+        print(self.request.query_string == template_values["queryParameters"])
 
         start = int(start) - 1
         rowsPerPage = 15
