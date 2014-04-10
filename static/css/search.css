@@ -27,43 +27,41 @@ img {
 }
 
 .type {
-	background-color: black;
 	color: white;
 	width: 150px;
 	float: right;
 	position: relative;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.8);
 	padding: 1%;
 	text-transform:uppercase;
 }
 
 .type.letters {
-	background-color: rgba(15,108,145,0.5);
+	background-color: rgba(9,64,85,0.8);
 }
 
 .type.personal.statements, .type.oral.histories, .type.group.statements {
-	background-color: rgba(39,139,14,0.5);
+	background-color: rgba(28,99,10,0.8);
 }
 
 .type.reports, .type.briefs, .type.transcripts, .type.minutes {
-	background-color: rgba(0,115,153,0.5);
+	background-color: rgba(0,64,85,0.8);
 }
 
 .type.newspapers, .type.articles, .type.news.bulletins, {
-	background-color: rgba(153,0,38,0.5);
+	background-color: rgba(106,0,27,0.8);
 }
 
 .type.title.pages, .type.table.of.content, .type.leaflets {
-	background-color: rgba(220,150,3,0.5);
+	background-color: rgba(94,0,94,0.8);
 }
 
 .type.magazines {
-	background-color: rgba(115,153,0,0.5);
+	background-color: rgba(113,0,56,0.8);
 }
 
 .type.progress.reports {
 	color: black;
-	background-color: green;
 }
 
 .snippet {
@@ -86,7 +84,7 @@ img {
 	text-align: center;
 }
 
-#result a {
-	font-size: 150%;
-	background-color: white;
+.link {
+	font-size: 140%;
+	color: rgb(0, 0, 119);
 }

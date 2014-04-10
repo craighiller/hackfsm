@@ -28,7 +28,7 @@
             <span class='type {{"; ".join(doc["fsmTypeOfResource"])}}'> {{"; ".join(doc["fsmTypeOfResource"])}} </span>
             
             <div class="result">
-                <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
+                <a class="link" href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>{{doc["fsmTitle"][0]}}</a>
                 {% if doc["fsmRelatedTitle"] %}
                   ({{"; ".join(doc["fsmRelatedTitle"])}})
                 {% endif %}
