@@ -15,7 +15,7 @@ class AudioHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("q")
         if not q:
-            q = ""
+            q = "[* TO *]"
         collection = self.request.get("collection")
         if not collection:
             collection = 1712
