@@ -16,9 +16,9 @@ class AudioHandler(webapp2.RequestHandler):
         myId = self.request.get("id")
         info = popupFindById(myId)['results'][0] # should only be one
         template_values = {}
-        template_values["response"] = info
+        template_values["audioResult"] = info
         template_values["typeOfResource"] = "audio"
         for audioDict in info['audio_files']:
-        	audioDict['transcript'] = 'hi'
+        	audioDict['transcript'] = getTranscript(info['id'], audioDict['id'])
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
