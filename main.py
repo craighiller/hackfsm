@@ -29,5 +29,5 @@ def images(filename):
 def main():
     return template("home.html")
 
-run(host='localhost', port=8000, debug=True)
+run(host='0.0.0.0', port=80, server="paste")
 
