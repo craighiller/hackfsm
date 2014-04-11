@@ -14,8 +14,10 @@
     {% if typeOfResource == "image" %}
       <div id="img-result">
         {% for doc in response %}
-          <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-          <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" alt={{doc["fsmTitle"][0]}}/></a>
+          <div class="img-result">
+            <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
+            <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" alt={{doc["fsmTitle"][0]}}/></a>
+          </div>
         {% endfor %}
       </div>
 
@@ -80,6 +82,21 @@
       $("h2").css({"margin-right": "16%"});
       $("h3").css({"margin-right": "16%"});
     }
+
+    var height = window.innerWidth / 4 - 100
+
+    $("img").css({
+        "height": height + "px"
+    });
+
+    $(window).resize(function() {
+      height = window.innerWidth / 4
+      console.log(height);
+      $("img").css({
+        "height": height + "px"
+      });
+    });
+
   });
 </script>
 </body>
