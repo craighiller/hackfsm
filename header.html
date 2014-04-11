@@ -22,24 +22,24 @@
     	</fieldset>
     </div>
 
-    {% if types %}
     <div id="filter">
         <fieldset><legent></legend>
             <p class="small-title">Filter by:</p>
-            {% for key in types %}
-                {% if key != "other" %}
-                    <label><input type="checkbox" name="filterType" value="{{key}}" 
-                        {% if key in filterType %}     
-                            checked="true"
-                        {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
-                {% endif %}
-            {% endfor %}
+            {% if types %}
+                {% for key in types %}
+                    {% if key != "other" %}
+                        <label><input type="checkbox" name="filterType" value="{{key}}" 
+                            {% if key in filterType %}     
+                                checked="true"
+                            {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
+                    {% endif %}
+                {% endfor %}
 
-            <label><input type="checkbox" name="filterType" value="other" 
-                {% if "other" in filterType %}     
-                    checked="true"
-                {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+                <label><input type="checkbox" name="filterType" value="other" 
+                    {% if "other" in filterType %}     
+                        checked="true"
+                    {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+            {% endif %}
         </fieldset>
-    </div>
-    {% endif %}
+    </div> 
 </form>
