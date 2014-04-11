@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys, os
 
 package_dir = "packages"
@@ -8,16 +7,15 @@ sys.path.insert(0, package_dir_path)
 
 import bottle
 
-from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+from bottle import get, route, run, jinja2_template as template
 from bottle import static_file
+
 
 from searchHandler import searchHandler
 from audioHandler import audioHandler
 from articleHandler import articleHandler
 from audioSearchHandler import audioSearchHandler
 from snippetHandler import snippetHandler
-
-TEMPLATE_PATH.append("./templates")
 
 @get('/<filename:re:.*\.css>')
 def stylesheets(filename):

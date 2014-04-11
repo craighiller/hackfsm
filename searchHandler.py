@@ -68,4 +68,3 @@ def searchHandler():
     template_values["numPages"] = (results["response"]["numFound"] // rowsPerPage) + 1
     template_values["response"] = results["response"]["docs"]
     return template("search.html", template_values)
-    
