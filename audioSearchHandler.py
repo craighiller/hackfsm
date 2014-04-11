@@ -28,5 +28,6 @@ class AudioSearchHandler(webapp2.RequestHandler):
         template_values["response"] = info
         template_values["typeOfResource"] = "audio"
         template_values["numPages"] = 1
+        template_values["query"] = self.request.get("q")
         template = jinja_environment.get_template("search.html")
         self.response.out.write(template.render(template_values))
