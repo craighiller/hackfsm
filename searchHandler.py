@@ -1,17 +1,18 @@
-import webapp2
 import jinja2
 import os
 import logging
 import cgi
 
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+
 from helper import appendToQuery, query, queryPluck
 from xml.etree import ElementTree as et
 
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+@route('/search')
+def searchHandler():
+    return template("search.html")
 
-
-class SearchHandler(webapp2.RequestHandler):
+"""
     def get(self):
         q = self.request.get("search")
         typeOfResource = self.request.get("type")
@@ -75,4 +76,4 @@ class SearchHandler(webapp2.RequestHandler):
         template_values["numPages"] = (results["response"]["numFound"] // rowsPerPage) + 1
         template_values["response"] = results["response"]["docs"]
         template = jinja_environment.get_template("search.html")
-        self.response.out.write(template.render(template_values))
+        self.response.out.write(template.render(template_values))"""

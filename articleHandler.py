@@ -1,4 +1,3 @@
-import webapp2
 import jinja2
 import os
 import logging
@@ -8,9 +7,14 @@ from xml.etree import ElementTree as et
 
 from helper import *
 
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+
+@route('/article')
+def articleHandler():
+    return template("search.html")
+
+"""
 class ArticleHandler(webapp2.RequestHandler):
     def get(self):
         myId = self.request.get("id").replace(':', '\:') # escape the colon metacharacter
@@ -32,4 +36,5 @@ class ArticleHandler(webapp2.RequestHandler):
         template_values['results'] = info
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
+    """
         

@@ -1,4 +1,3 @@
-import webapp2
 import jinja2
 import os
 import logging
@@ -7,9 +6,13 @@ from xml.etree import ElementTree as et
 
 from helper import *
 
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
 
+@route('/audioId')
+def audioHandler():
+    return template("search.html")
+
+"""
 class AudioHandler(webapp2.RequestHandler):
     def get(self):
         myId = self.request.get("id")
@@ -34,3 +37,4 @@ class AudioHandler(webapp2.RequestHandler):
         template_values["keysToDisplay"] = ['image_files', 'description', 'title', 'date_broadcast', 'date_created', 'series_title']
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
+        """

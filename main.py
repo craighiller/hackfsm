@@ -41,6 +41,12 @@ bottle.debug(True)
 from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
 from bottle import static_file
 
+from searchHandler import searchHandler
+from audioHandler import audioHandler
+from articleHandler import articleHandler
+from audioSearchHandler import audioSearchHandler
+from snippetHandler import snippetHandler
+
 TEMPLATE_PATH.append("./templates")
 
 @get('/<filename:re:.*\.css>')

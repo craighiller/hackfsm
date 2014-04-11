@@ -1,9 +1,15 @@
-import webapp2
 import urllib2
 from xml.etree import ElementTree as et
 import json
 import re
 
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+
+@route('/find_snippets')
+def snippetHandler():
+    return json.dumps({})
+
+"""
 class SnippetHandler(webapp2.RequestHandler):
     def get(self):
         query = self.request.get("query")
@@ -17,9 +23,6 @@ class SnippetHandler(webapp2.RequestHandler):
         targets = []
 
         def acquireTargets(e):
-            """
-            Finds all matches against queryLower in the XML
-            """
             if e.text and e.text.lower().find(queryLower) != -1:
                 targets.append(e.text)
             for n in e:
@@ -41,9 +44,6 @@ class SnippetHandler(webapp2.RequestHandler):
             # there were no pure matches.  Just get something so the user has a snippet
             something = []
             def acquireSomething(e):
-                """
-                Finds first available snippet in the HTML
-                """
                 if len(something): # we got something, halt the recursion
                     return
                 if e.text and len(e.text.strip()) > 20: # make sure we don't get something short
@@ -53,3 +53,4 @@ class SnippetHandler(webapp2.RequestHandler):
             acquireSomething(text)
             myResponse = {'snippet':something[0], 'matches':0, 'fsmTeiUrl':teiUrl}
             self.response.out.write(json.dumps(myResponse))
+"""
