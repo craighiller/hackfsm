@@ -40,8 +40,14 @@
                         checked="true"
                     {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
             {% elif typeOfResource == "audio" %}
-                <label><input type="radio" name="filterType" value="1712">UCSF 1712</label><br>
-                <label><input type="radio" name="filterType" value="1703">1703</label>
+                <label><input type="radio" name="collectionFilter" value="1712" onclick="this.form.submit();"
+                    {% if 1703 != collection %}
+                        checked="true"
+                    {% endif %} onclick="this.form.submit();">(UCSF Archives & Special Collections)</label><br>
+                <label><input type="radio" name="collectionFilter" value="1703" 
+                    {% if 1703 == collection %}
+                        checked="true"
+                    {% endif %} onclick="this.form.submit();">(UC-Berkeley Ethnic Studies Library)</label>
             {% endif %}
         </fieldset>
     </div> 

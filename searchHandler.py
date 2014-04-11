@@ -16,7 +16,10 @@ class SearchHandler(webapp2.RequestHandler):
         q = self.request.get("search")
         typeOfResource = self.request.get("type")
         if typeOfResource == "audio":
-            self.redirect("/audioSearch?q=" + q)
+            temp = ''
+            if self.request.get("collectionFilter"):
+                temp += '&collection=' + self.request.get("collectionFilter")
+            self.redirect("/audioSearch?q=" + q + temp)
             return
         elif typeOfResource == "image":
             q = appendToQuery(q, '-fsmTeiUrl:[* TO *]') # don't show written text
@@ -34,7 +37,10 @@ class SearchHandler(webapp2.RequestHandler):
             else:
                 typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
-        filterType = self.request.get_all("filterType")
+        if typeOfResource != "image":
+            filterType = self.request.get_all("filterType")
+        else:
+            filterType = typesOfResourcesDict.keys()
         if 'other' in filterType: 
             # exclude what is not in the filterType
             exclusion = set(typesOfResourcesDict.keys()) - set(filterType) - set('other')
