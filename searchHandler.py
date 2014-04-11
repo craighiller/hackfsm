@@ -3,7 +3,7 @@ import os
 import logging
 import cgi
 
-from bottle import route, request, run, TEMPLATE_PATH, jinja2_template as template
+from bottle import route, request, jinja2_template as template
 
 from helper import appendToQuery, query, queryPluck
 from xml.etree import ElementTree as et
@@ -34,7 +34,7 @@ def searchHandler():
         else:
             typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
-    filterType = request.query.filterType
+    filterType = request.query.getall('filterType')
 
     if 'other' in filterType: 
         # exclude what is not in the filterType
