@@ -28,7 +28,9 @@
         {% if audioResult %}
           {% for audioDict in audioResult["audio_files"] %}
             <iframe src={{audioDict["url"]}}></iframe>
-            {{ transcript }}
+            {% for line in audioDict["transcript"] %}
+              <p>{{line["start"]}}  {{line["text"]}}</p>
+            {% endfor %}
           {% endfor %}
 
         {% elif picture_link %}
