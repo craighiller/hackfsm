@@ -20,43 +20,46 @@
   <div id="result-wrapper">
     <div id="result">
       <div id="article">
-        <p>{{"; ".join(results.fsmDateCreated)}}</p>
-        {% if results.fsmRelatedTitle %}
-          <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
-        {% endif %}
-
-        {% if picture_link %}
-          <i>{{"; ".join(results.fsmCreator)}}</i></br>
-          <div id="image">
-            <img src={{picture_link}} style="max-height:100%" alt={{"; ".join(results.fsmTitle)}}/>
-            <p>{{"; ".join(results.fsmTitle)}}</p>
-          </div>
-
+        {% if audioResult %}
         {% else %}
-          <h2>{{"; ".join(results.fsmTitle)}}</h2>
-          <i>{{"; ".join(results.fsmCreator)}}</i><br>
-          <p>{{content}}</p>
+          <p>{{"; ".join(results.fsmDateCreated)}}</p>
+          {% if results.fsmRelatedTitle %}
+            <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
+          {% endif %}
+
+          {% if picture_link %}
+            <i>{{"; ".join(results.fsmCreator)}}</i></br>
+            <div id="image">
+              <img src={{picture_link}} style="max-height:100%" alt={{"; ".join(results.fsmTitle)}}/>
+              <p>{{"; ".join(results.fsmTitle)}}</p>
+            </div>
+
+          {% else %}
+            <h2>{{"; ".join(results.fsmTitle)}}</h2>
+            <i>{{"; ".join(results.fsmCreator)}}</i><br>
+            <p>{{content}}</p>
+          {% endif %}
+
+          <div id="more">
+            <script type="text/javascript">
+            /* <![CDATA[ */ 
+               EBcitation = {
+                   "page":"{{"; ".join(results.fsmTitle)}}",
+                   "site":"Free Speech Movement Archive",
+                   "url":document.URL,
+                   "date":"{{"; ".join(results.fsmDateCreated)}}",
+                   "authors":"{{"; ".join(results.fsmCreator)}}"
+               };
+               EBversion  = "1.0";
+               document.write(unescape("%3Cscript src='http://media.easybib.com/citethis/"+EBversion+"/widget_mini.js' type='text/javascript'%3E%3C/script%3E"));
+            /* ]]> */
+            </script>
+
+            {% for key in results.keys() %}
+              <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
+            {% endfor %}
+          </div>
         {% endif %}
-
-        <div id="more">
-          <script type="text/javascript">
-          /* <![CDATA[ */ 
-             EBcitation = {
-                 "page":"{{"; ".join(results.fsmTitle)}}",
-                 "site":"Free Speech Movement Archive",
-                 "url":document.URL,
-                 "date":"{{"; ".join(results.fsmDateCreated)}}",
-                 "authors":"{{"; ".join(results.fsmCreator)}}"
-             };
-             EBversion  = "1.0";
-             document.write(unescape("%3Cscript src='http://media.easybib.com/citethis/"+EBversion+"/widget_mini.js' type='text/javascript'%3E%3C/script%3E"));
-          /* ]]> */
-          </script>
-
-          {% for key in results.keys() %}
-            <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
-          {% endfor %}
-        </div>
       </div>
     </div>
   </div>
