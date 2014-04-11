@@ -48,7 +48,7 @@ def find(id):
     result = urllib2.urlopen(url)
     return eval(result.read())
 
-def popup(q, collection):
+def popup(q, collection, page):
     """
     Helper to send and evaluate queries to the popup archive
     Returns a json dictionary
@@ -56,7 +56,8 @@ def popup(q, collection):
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
         'query':q,
-        'filters[collection_id]':collection
+        'filters[collection_id]':collection,
+        'page':page
     })
     result = urllib2.urlopen(url)
     j = json.loads(result.read())
