@@ -39,7 +39,7 @@
                 {% endif %}
                 &mdash; <i>{{"; ".join(doc["fsmCreator"])}}</i>
                 <p class='snippet' id={{doc["fsmTeiUrl"][0]}}></p>
-                <span id={{'snippet' + doc["fsmTeiUrl"][0].replace(':', '').replace('.', '').replace('/', '')}}>#matches: 0</span>
+                <span>#matches: 0</span>
             </div>
         {% endfor %}
       </div>
@@ -71,7 +71,7 @@
         dataType: 'json',
         success: function(data, status){
           obj.innerHTML = data.snippet;
-          $('#snippet' + data.fsmTeiUrl.replace(/[.:\/]/g, ''))[0].innerHTML = "#matches: " + data.matches;
+          $(obj).next()[0].innerHTML = "#matches: " + data.matches;
         }
       });
     });
