@@ -24,7 +24,7 @@ class AudioHandler(webapp2.RequestHandler):
         	transcript = ""
         	for elem in transcriptArray:
         		if len(elem['text']) != 0:
-        			transcript += elem['start'] + '\t' + elem['text']
+        			transcript += elem['start'] + '    ' + elem['text'] + '\n'
         	audioDict['transcript'] = transcript
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
