@@ -20,6 +20,11 @@ class AudioHandler(webapp2.RequestHandler):
         template_values["typeOfResource"] = "audio"
         template_values["results"] = {}
         for audioDict in info['audio_files']:
-        	audioDict['transcript'] = getTranscript(info['id'], audioDict['id'])
+        	transcriptArray = getTranscript(info['id'], audioDict['id'])['parts']
+        	transcript = ""
+        	for elem in transcriptArray:
+        		if len(elem['text']) != 0:
+        			transcript += elem['start'] + '\t' elem['text']
+        	audioDict['transcript'] = transcript
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))
