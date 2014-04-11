@@ -24,4 +24,4 @@ def audioHandler():
                 transcript.append({'start':elem['start'], 'text':elem['text']})
         audioDict['transcript'] = transcript
     template_values["keysToDisplay"] = ['image_files', 'description', 'title', 'date_broadcast', 'date_created', 'series_title']
-    return template("article.html", template_values)
+    return template("result.html", template_values)

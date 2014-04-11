@@ -1,13 +1,11 @@
-h2, h3 {
+h3, h4 {
 	background-color: white;
 	padding: 1%;
-	margin-top: 3%;
 }
 
-h3 {
+h4 {
 	text-align: center;
 	clear: both;
-	margin-bottom: 3%;	
 }
 
 .img-result {
@@ -84,7 +82,6 @@ legend {
 	width: 12%;
 	float: right;
 	background-color: rgba(255,255,255,0.8);
-	margin-top: 3%;
 	box-shadow: 5px 5px 5px #707070;
 }
 

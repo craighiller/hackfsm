@@ -22,5 +22,4 @@ def articleHandler():
         template_values['content'] = xmlToHTML(text)
 
     template_values['results'] = info
-    return template("article.html", template_values)
-    
+    return template("result.html", template_values)
