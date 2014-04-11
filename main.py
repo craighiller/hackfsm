@@ -43,7 +43,6 @@ from bottle import static_file
 
 TEMPLATE_PATH.append("./templates")
 
-
 @get('/<filename:re:.*\.css>')
 def stylesheets(filename):
     return static_file(filename, root='static/css')
