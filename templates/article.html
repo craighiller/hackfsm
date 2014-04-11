@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Free Speech Movement Archive</title>
-  <link rel="stylesheet" href="bootstrap.css">
-  <link rel="stylesheet" href="custom.css">
-  <link rel="stylesheet" href="result.css">
-  <link href ='http://fonts.googleapis.com/css?family=Oswald|Roboto' rel='stylesheet' type='text/css'>
-</head>
-<body>
-  {% include "header.html" %}
+<link rel="stylesheet" href="result.css">
+{% extends "base.html" %}
+{% block body %}
   {% if results.fsmTypeOfResource %}
     <div id="type">
         {{results.fsmTypeOfResource[0]}}
@@ -93,5 +85,4 @@
 
   });
 </script>
-</body>
-</html>
+{% endblock %}

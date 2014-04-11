@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Free Speech Movement Archive</title>
-  <link rel="stylesheet" href="bootstrap.css">
-  <link rel="stylesheet" href="custom.css">
-  <link rel="stylesheet" href="search.css">
-  <link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
-</head>
-<body>
-  {% include "header.html" %}
+<link rel="stylesheet" href="search.css">
+{% extends "base.html" %}
+{% block body %}
   <h2>Search Results for: {{query}}</h2>
   
     {% if typeOfResource == "image" %}
@@ -98,5 +90,4 @@
 
   });
 </script>
-</body>
-</html>
+{% endblock %}
