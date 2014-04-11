@@ -1,4 +1,4 @@
-from google.appengine.api import urlfetch
+import urllib2
 import urllib
 from environment_variables import *
 import json
@@ -17,8 +17,8 @@ def queryPluck(q):
                           'facet':'true',
                           'facet.field':'fsmTypeOfResource',
                           'facet.mincount':1})
-    result = urlfetch.fetch(url)
-    return eval(result.content)
+    result = urllib2.urlopen(url)
+    return eval(result.read())
 
 def query(q, start="0", rowsPerPage="30"):
     """
@@ -32,8 +32,8 @@ def query(q, start="0", rowsPerPage="30"):
                           'app_id':FSM_APP_ID,
                           'app_key':FSM_APP_KEY,
                           'rows':rowsPerPage})
-    result = urlfetch.fetch(url)
-    return eval(result.content)
+    result = urllib2.urlopen(url)
+    return eval(result.read())
 
 def find(id):
     """
@@ -45,8 +45,8 @@ def find(id):
         'wt':'json',
         'app_id':FSM_APP_ID,
         'app_key':FSM_APP_KEY})
-    result = urlfetch.fetch(url)
-    return eval(result.content)
+    result = urllib2.urlopen(url)
+    return eval(result.read())
 
 def popup(q, collection):
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
@@ -54,8 +54,8 @@ def popup(q, collection):
         'query':q,
         'filters[collection_id]':collection
     })
-    result = urlfetch.fetch(url)
-    j = json.loads(result.content)
+    result = urllib2.urlopen(url)
+    j = json.loads(result.read())
     return j
 
 def popupFindById(id):
@@ -63,15 +63,15 @@ def popupFindById(id):
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
         'query':'id:' + id,
     })
-    result = urlfetch.fetch(url)
-    j = json.loads(result.content)
+    result = urllib2.urlopen(url)
+    j = json.loads(result.read())
     return j
     
 def getTranscript(item_id, audio_id):
     BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"
     url = BASE_URL.format(item_id = item_id, audio_file_id = audio_id)
-    result = urlfetch.fetch(url)
-    j = json.loads(result.content)
+    result = urllib2.urlopen(url)
+    j = json.loads(result.read())
     return j
     
 def appendToQuery(q, elem):

@@ -3,7 +3,6 @@ import jinja2
 import os
 import logging
 
-from google.appengine.api import urlfetch
 from xml.etree import ElementTree as et
 
 from helper import *
