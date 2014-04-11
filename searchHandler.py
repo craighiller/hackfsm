@@ -37,7 +37,10 @@ class SearchHandler(webapp2.RequestHandler):
             else:
                 typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
-        filterType = self.request.get_all("filterType")
+        if typeOfResource != "image":
+            filterType = self.request.get_all("filterType")
+        else:
+            filterType = typesOfResourcesDict.keys()
         if 'other' in filterType: 
             # exclude what is not in the filterType
             exclusion = set(typesOfResourcesDict.keys()) - set(filterType) - set('other')
