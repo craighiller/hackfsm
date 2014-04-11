@@ -39,6 +39,9 @@
                     {% if "other" in filterType %}     
                         checked="true"
                     {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+            {% elif typeOfResource == "audio" %}
+                <label><input type="radio" name="filterType" value="1712">UCSF 1712</label><br>
+                <label><input type="radio" name="filterType" value="1703">1703</label>
             {% endif %}
         </fieldset>
     </div> 
