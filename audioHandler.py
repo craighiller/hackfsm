@@ -1,16 +1,24 @@
-import jinja2
-import os
-import logging
+import sys, os
+
+package_dir = "packages"
+package_dir_path = os.path.join(os.path.dirname(__file__), package_dir)
+sys.path.insert(0, package_dir_path)
+
+import bottle
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+
 
 from xml.etree import ElementTree as et
 
 from helper import *
 
-from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+TEMPLATE_PATH.append("./templates")
+
 
 @route('/audioId')
 def audioHandler():
     return template("search.html")
+
 
 """
 class AudioHandler(webapp2.RequestHandler):
