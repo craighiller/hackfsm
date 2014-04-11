@@ -14,6 +14,10 @@ audio {
 	margin-bottom: 2%;
 }
 
+.toggle-button {
+	margin-bottom:2%;
+}
+
 #type {
 	width: 200px;
 	background-color: rgba(0,0,0,0.5);
