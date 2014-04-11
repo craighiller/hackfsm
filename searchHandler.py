@@ -16,7 +16,10 @@ class SearchHandler(webapp2.RequestHandler):
         q = self.request.get("search")
         typeOfResource = self.request.get("type")
         if typeOfResource == "audio":
-            self.redirect("/audioSearch?q=" + q)
+            temp = ''
+            if self.request.get("collectionFilter"):
+                temp += '&collection=' + self.request.get("collectionFilter")
+            self.redirect("/audioSearch?q=" + q + temp)
             return
         elif typeOfResource == "image":
             q = appendToQuery(q, '-fsmTeiUrl:[* TO *]') # don't show written text

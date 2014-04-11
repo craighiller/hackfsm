@@ -19,13 +19,16 @@ class AudioSearchHandler(webapp2.RequestHandler):
         collection = self.request.get("collection")
         if not collection:
             collection = 1712
-        results = popup(q, int(collection))
+        else:
+            collection = int(collection)
+        results = popup(q, collection)
         if 'results' in results.keys():
             info = results['results']
         else:
             info = ""
         template_values = {}
         template_values["response"] = info
+        template_values["collection"] = collection
         template_values["typeOfResource"] = "audio"
         template_values["numPages"] = 1
         template_values["query"] = self.request.get("q")
