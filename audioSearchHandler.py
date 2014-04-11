@@ -30,7 +30,7 @@ def audioSearchHandler():
     else:
         info = ""
 
-    template_values = {
+    template_values = {}
     template_values["response"] = info
     template_values["collection"] = collection
     template_values["typeOfResource"] = "audio"
