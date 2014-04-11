@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Free Speech Movement Archive</title>
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/search.css">
+  <link href ='http://fonts.googleapis.com/css?family=Oswald|BenchNine' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  {% include "header.html" %}
+  <div id="text-result">
+    <div class="result">
+      {% for doc in response %}
+        {% for key in doc.keys() %}
+          {{key}} - {{doc[key]}}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+ </body>

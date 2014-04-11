@@ -11,7 +11,13 @@
                 <label><input type="radio" name="type" value="image" 
                 	{% if typeOfResource == "image" %}
                 		checked="true"
-                	{% endif %}>Image</label>
+                	{% endif %}>Image
+                </label>
+                <label><input type="radio" name="type" value="audio" 
+                    {% if typeOfResource == "audio" %}
+                        checked="true"
+                    {% endif %}>Audio
+                </label>
             </div>
     	</fieldset>
     </div>

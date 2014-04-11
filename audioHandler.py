@@ -15,8 +15,17 @@ class AudioHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("q")
         collection = self.request.get("collection")
-        x=popup(q, int(collection))['results']
-        for i in x:
+        if not collection:
+            collection = 1712
+        info = popup(q, int(collection))['results']
+        template_values = {}
+        template_values["response"] = info
+        template = jinja_environment.get_template("audioSearch.html")
+        self.response.out.write(template.render(template_values))
+
+        return
+
+        for i in info:
             #self.response.out.write(i.keys())
             #self.response.out.write("Identifier: "+ str(i['identifier'])+"</br></br>")
             
