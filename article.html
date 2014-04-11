@@ -27,7 +27,10 @@
 
         {% if audioResult %}
           {% for audioDict in audioResult["audio_files"] %}
-            <iframe src={{audioDict["url"]}}></iframe>
+            <audio controls>
+                <source src={{audioDict["url"]}}>
+                <embed height="50" width="100" src={{audioDict["url"]}}>   
+            </audio>
             {{ transcript }}
           {% endfor %}
 
