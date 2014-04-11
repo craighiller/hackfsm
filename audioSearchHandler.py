@@ -19,9 +19,13 @@ class AudioSearchHandler(webapp2.RequestHandler):
         collection = self.request.get("collection")
         if not collection:
             collection = 1712
-        info = popup(q, int(collection))['results']
+        results = popup(q, int(collection))
+        if 'results' in results.keys:
+            info = results['results']
+        else
+            info = "NONE SUCKA"
         template_values = {}
         template_values["response"] = info
         template_values["typeOfResource"] = "audio"
-        template = jinja_environment.get_template("audio.html")
+        template = jinja_environment.get_template("search.html")
         self.response.out.write(template.render(template_values))
