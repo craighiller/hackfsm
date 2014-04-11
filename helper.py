@@ -61,7 +61,7 @@ def popup(q, collection):
 def popupFindById(id):
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
-        'query':'id:' + q,
+        'query':'id:' + id,
     })
     result = urlfetch.fetch(url)
     j = json.loads(result.content)
