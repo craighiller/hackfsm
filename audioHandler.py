@@ -14,12 +14,15 @@ jinja_environment = jinja2.Environment(
 class AudioHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("q")
+        if not q:
+            q = ""
         collection = self.request.get("collection")
         if not collection:
             collection = 1712
         info = popup(q, int(collection))['results']
         template_values = {}
         template_values["response"] = info
+        template_values["typeOfResource"] = "audio"
         template = jinja_environment.get_template("audioSearch.html")
         self.response.out.write(template.render(template_values))
 

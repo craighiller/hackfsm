@@ -13,8 +13,11 @@
   <div id="text-result">
     <div class="result">
       {% for doc in response %}
+      ---------------------------
         {% for key in doc.keys() %}
           {{key}} - {{doc[key]}}
+          <br>
+          <br>
         {% endfor %}
       {% endfor %}
     </div>
