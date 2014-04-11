@@ -1,23 +1,36 @@
 import sys, os
 
-package_dir = "packages"
-package_dir_path = os.path.join(os.path.dirname(__file__), package_dir)
-sys.path.insert(0, package_dir_path)
-
-import bottle
-from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
+from bottle import request, route, jinja2_template as template
 
 
 from xml.etree import ElementTree as et
 
 from helper import *
 
-TEMPLATE_PATH.append("./templates")
-
 
 @route('/audioId')
 def audioHandler():
-    return template("search.html")
+    myId = request.query["id"]
+    info = popupFindById(myId)['results'][0] # should only be one
+    template_values = {}
+    template_values["audioResult"] = info
+    template_values["typeOfResource"] = "audio"
+    template_values["results"] = {
+        'fsmDateCreated':[info['date_created']], 
+        'fsmTitle':[info['title']]
+    }
+    if 'creator' in info:
+        template_values['creator'] = info['creator']
+
+    for audioDict in info['audio_files']:
+        transcriptArray = getTranscript(info['id'], audioDict['id'])['parts']
+        transcript = []
+        for elem in transcriptArray:
+            if len(elem['text']) != 0:
+                transcript.append({'start':elem['start'], 'text':elem['text']})
+        audioDict['transcript'] = transcript
+    template_values["keysToDisplay"] = ['image_files', 'description', 'title', 'date_broadcast', 'date_created', 'series_title']
+    return template("article.html", template_values)
 
 
 """
