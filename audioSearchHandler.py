@@ -23,7 +23,7 @@ class AudioSearchHandler(webapp2.RequestHandler):
         if 'results' in results.keys():
             info = results['results']
         else:
-            info = "Sorry no results found."
+            info = ""
         template_values = {}
         template_values["response"] = info
         template_values["typeOfResource"] = "audio"
