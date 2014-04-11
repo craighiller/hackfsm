@@ -6,9 +6,15 @@ import cgi
 
 @route('/search')
 def searchHandler():
+    """
+    Handles all search requests.  If it is directed at the popup archive
+    redirects the request to audioSearchHandler.  Otherwise this handles
+    the FSM archive setup
+    """
     q = request.query.search
     typeOfResource = request.query.type
     if typeOfResource == "audio":
+        # if audio let the audioSearchHandler get this with a redirect
         temp = ''
         if 'collectionFilter' in request.query:
             temp += '&collection=' + request.query.collectionFilter
@@ -64,7 +70,7 @@ def searchHandler():
     template_values["typeOfResource"] = typeOfResource
     template_values['types'] = typesOfResourcesDict
     template_values['filterType'] = filterType
-    template_values["query"] = cgi.escape(request.query.search) # block XSS
+    template_values["query"] = cgi.escape(request.query.search) # block XSS with cgi escape
     template_values["numPages"] = (results["response"]["numFound"] // rowsPerPage) + 1
     template_values["response"] = results["response"]["docs"]
     return template("search.html", template_values)
