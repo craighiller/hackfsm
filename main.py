@@ -29,7 +29,17 @@ app = webapp2.WSGIApplication([
     ('/audioSearch', AudioSearchHandler)
 ], debug=True)"""
 
-from bottle import route, run, jinja2_template as template
+from bottle import get, route, run, jinja2_template as template
+
+from bottle import static_file
+
+@get('/<filename:re:.*\.css>')
+def stylesheets(filename):
+    return static_file(filename, root='static/css')
+
+@get('/<filename:re:.*\.(jpg|png|gif|ico)>')
+def images(filename):
+    return static_file(filename, root='static/img')
 
 @route('/')
 def main():
