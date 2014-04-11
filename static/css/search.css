@@ -64,7 +64,7 @@ legend {
 	background-color: rgba(113,0,56,0.8);
 }
 
-.snippet {
+.snippet, .result {
 	border-left: 1px;
 }
 
@@ -88,7 +88,7 @@ legend {
 	box-shadow: 5px 5px 5px #707070;
 }
 
-#text-result {
+#text-result, #audio-result {
 	margin-right: 16%;
 	background-color: rgba(0,0,0,0.5);
 }

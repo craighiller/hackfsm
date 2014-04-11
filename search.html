@@ -47,7 +47,7 @@
         {% for doc in response %}
           <div class="result">
               <a class="link" href={{"/audio?id=%s" % doc["id"]}}>{{doc["title"]}}</a>
-              <p class="snippet">{{doc["description"]}}</p>
+              <p class="description">{{doc["description"]}}</p>
           </div>
         {% endfor %} 
       </div>
@@ -79,9 +79,6 @@
       $("#filter").show();
       $("h2").css({"margin-right": "16%"});
       $("h3").css({"margin-right": "16%"});
-    }
-    else if ($("#img-result").length == 0) {
-      
     }
   });
 </script>
