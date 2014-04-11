@@ -64,10 +64,17 @@
              document.write(unescape("%3Cscript src='http://media.easybib.com/citethis/"+EBversion+"/widget_mini.js' type='text/javascript'%3E%3C/script%3E"));
           /* ]]> */
           </script>
-
-          {% for key in results.keys() %}
-            <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
-          {% endfor %}
+          {% if audioResult %}
+            {% for key in audioResult.keys() %}
+              {% if key in keysToDisplay %}
+                <br><b>{{key}}: </b>{{audioResult[key]}}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {% for key in results.keys() %}
+                <br><b>{{key[3:]}}: </b>{{"; ".join(results[key])}}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>
