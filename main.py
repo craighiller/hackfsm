@@ -39,7 +39,7 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/article', ArticleHandler),
     ('/find_snippets', SnippetHandler),
-    ('/audioID', AudioHandler),
+    ('/audioId', AudioHandler),
     ('/audioSearch', AudioSearchHandler)
 ], debug=True)
 
