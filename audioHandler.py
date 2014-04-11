@@ -21,10 +21,10 @@ class AudioHandler(webapp2.RequestHandler):
         template_values["results"] = {}
         for audioDict in info['audio_files']:
         	transcriptArray = getTranscript(info['id'], audioDict['id'])['parts']
-        	transcript = ""
+        	transcript = []
         	for elem in transcriptArray:
         		if len(elem['text']) != 0:
-        			transcript += elem['start'] + '    ' + elem['text'] + '\n'
+        			transcript.append({'start':elem['start'], 'text':elem['text']})
         	audioDict['transcript'] = transcript
         template = jinja_environment.get_template("article.html")
         self.response.out.write(template.render(template_values))

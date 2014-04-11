@@ -9,8 +9,9 @@ i {
 	display: block;
 }
 
-iframe {
+audio {
 	width: 100%;
+	margin-bottom: 2%;
 }
 
 #type {
