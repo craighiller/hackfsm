@@ -29,9 +29,20 @@ app = webapp2.WSGIApplication([
     ('/audioSearch', AudioSearchHandler)
 ], debug=True)"""
 
-from bottle import get, route, run, jinja2_template as template
+import sys, os
 
+package_dir = "packages"
+package_dir_path = os.path.join(os.path.dirname(__file__), package_dir)
+sys.path.insert(0, package_dir_path)
+
+import bottle
+bottle.debug(True)
+
+from bottle import get, route, run, TEMPLATE_PATH, jinja2_template as template
 from bottle import static_file
+
+TEMPLATE_PATH.append("./templates")
+
 
 @get('/<filename:re:.*\.css>')
 def stylesheets(filename):
