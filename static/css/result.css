@@ -9,6 +9,10 @@ i {
 	display: block;
 }
 
+iframe {
+	width: 100%;
+}
+
 #type {
 	width: 200px;
 	background-color: rgba(0,0,0,0.5);
