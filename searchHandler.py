@@ -3,7 +3,7 @@ import os
 import logging
 import cgi
 
-from bottle import route, request, run, TEMPLATE_PATH, jinja2_template as template
+from bottle import redirect, route, request, jinja2_template as template
 
 from helper import appendToQuery, query, queryPluck
 from xml.etree import ElementTree as et
@@ -16,7 +16,7 @@ def searchHandler():
         temp = ''
         if 'collectionFilter' in request.query:
             temp += '&collection=' + request.query.collectionFilter
-        self.redirect("/audioSearch?q=" + q + temp)
+        redirect("/audioSearch?q=" + q + temp)
         return
     elif typeOfResource == "image":
         q = appendToQuery(q, '-fsmTeiUrl:[* TO *]') # don't show written text
@@ -34,7 +34,7 @@ def searchHandler():
         else:
             typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
-    filterType = request.query.filterType
+    filterType = request.query.getall('filterType')
 
     if 'other' in filterType: 
         # exclude what is not in the filterType
