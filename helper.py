@@ -56,8 +56,16 @@ def popup(q, collection):
     })
     result = urlfetch.fetch(url)
     j = json.loads(result.content)
-    print(url)
-    return (j)
+    return j
+
+def popupFindById(id):
+    BASE_URL = "https://www.popuparchive.com:443/api/search?"
+    url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
+        'query':'id:' + q,
+    })
+    result = urlfetch.fetch(url)
+    j = json.loads(result.content)
+    return j
     
 def getTranscript(item_id, audio_id):
     BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"

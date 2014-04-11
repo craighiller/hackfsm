@@ -23,6 +23,7 @@ from searchHandler import SearchHandler
 from articleHandler import ArticleHandler
 from snippetHandler import SnippetHandler
 from audioHandler import AudioHandler
+from audioSearchHandler import AudioSearchHandler
  
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -38,6 +39,7 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/article', ArticleHandler),
     ('/find_snippets', SnippetHandler),
-    ('/audio', AudioHandler)
+    ('/audioID', AudioHandler),
+    ('/audioSearch', AudioSearchHandler)
 ], debug=True)
 
