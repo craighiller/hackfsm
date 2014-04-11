@@ -25,7 +25,13 @@
           <h2>{{"; ".join(results.fsmRelatedTitle)}}</h2>
         {% endif %}
 
-        {% if picture_link %}
+        {% if audioResult %}
+          {% for audioDict in audioResult["audio_files"] %}
+            {{audioDict["url"]}}
+            {{audioDict["transcript"]}}
+          {% endfor %}
+
+        {% elif picture_link %}
           <i>{{"; ".join(results.fsmCreator)}}</i></br>
           <div id="image">
             <img src={{picture_link}} style="max-height:100%" alt={{"; ".join(results.fsmTitle)}}/>
