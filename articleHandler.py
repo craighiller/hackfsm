@@ -3,7 +3,7 @@ import jinja2
 import os
 import logging
 
-from google.appengine.api import urlfetch
+import urllib2
 from xml.etree import ElementTree as et
 
 from helper import *
@@ -24,7 +24,7 @@ class ArticleHandler(webapp2.RequestHandler):
         else:
             teiUrl = info["fsmTeiUrl"][-1]
             del info['fsmTeiUrl']
-            r = urlfetch.fetch(teiUrl).content
+            r = urllib2.urlopen(teiUrl).read()
             xml = et.fromstring(r)
             text = xml.findall("text")[0] # ignore the TEI header, only get content
             template_values['content'] = xmlToHTML(text)

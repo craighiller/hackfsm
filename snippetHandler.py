@@ -1,5 +1,5 @@
 import webapp2
-from google.appengine.api import urlfetch
+import urllib2
 from xml.etree import ElementTree as et
 import json
 import re
@@ -10,7 +10,7 @@ class SnippetHandler(webapp2.RequestHandler):
         queryLower = query.lower()
 
         teiUrl = self.request.get("fsmTeiUrl")
-        r = urlfetch.fetch(teiUrl).content
+        r = urllib2.urlopen(teiUrl).read()
         xml = et.fromstring(r)
         text = xml.findall("text")[0] # ignore the header
 
