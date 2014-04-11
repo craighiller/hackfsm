@@ -5,9 +5,13 @@ from helper import *
 
 @route('/article')
 def articleHandler():
+    """
+    Handle gathering information about a single article (image or TEI)
+    Uses the result template
+    """
     myId = request.query["id"].replace(':', '\:') # escape the colon metacharacter
     info = find(myId)["response"]["docs"][0] # get the first doc (should only be one)
-    del info['id'] # del keys so we don't display them at the bottom
+    del info['id'] # del keys (don't display them at the bottom of result page)
     template_values = {}
     if "fsmImageUrl" in info:
         image_link = info["fsmImageUrl"][-1]

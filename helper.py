@@ -49,6 +49,10 @@ def find(id):
     return eval(result.read())
 
 def popup(q, collection):
+    """
+    Helper to send and evaluate queries to the popup archive
+    Returns a json dictionary
+    """
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
         'query':q,
@@ -59,6 +63,10 @@ def popup(q, collection):
     return j
 
 def popupFindById(id):
+    """
+    Helper to find a single audio article in the popup article by id
+    Returns a json dictionary
+    """
     BASE_URL = "https://www.popuparchive.com:443/api/search?"
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
         'query':'id:' + id,
@@ -68,6 +76,11 @@ def popupFindById(id):
     return j
     
 def getTranscript(item_id, audio_id):
+    """
+    Helper to collect the transcript for a single item/audio
+    pair from the popup archive
+    Returns a json dictionary
+    """
     BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"
     url = BASE_URL.format(item_id = item_id, audio_file_id = audio_id)
     result = urllib2.urlopen(url)
@@ -76,8 +89,8 @@ def getTranscript(item_id, audio_id):
     
 def appendToQuery(q, elem):
     """
-    Helper to extend a query.  Should have an AND condition between
-    if not the first part of the query
+    Helper to extend a query (for use in the fsm archive).  
+    Should have an AND condition between query elements if not the first part of the query
     """
     if q == '':
         return elem
