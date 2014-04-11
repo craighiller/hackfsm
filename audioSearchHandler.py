@@ -20,10 +20,10 @@ class AudioSearchHandler(webapp2.RequestHandler):
         if not collection:
             collection = 1712
         results = popup(q, int(collection))
-        if 'results' in results.keys:
+        if 'results' in results.keys():
             info = results['results']
-        else
-            info = "NONE SUCKA"
+        else:
+            info = "Sorry no results found."
         template_values = {}
         template_values["response"] = info
         template_values["typeOfResource"] = "audio"
