@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="search.css">
 {% extends "base.html" %}
 {% block body %}
+  <link rel="stylesheet" href="search.css">
   {% if not response %}
     <h3>No result found for <i>{{query}}</i>. </h3>
   {% else %}
