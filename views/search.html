@@ -6,14 +6,18 @@
   {% else %}
     <h3>Search Results for: {{query}}</h3>
       {% if typeOfResource == "image" %}
-        <div id="img-result">
+        <ul id="img-result">
           {% for doc in response %}
-            <div class="img-result">
+            <li class="img-result">
               <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-              <img src='{{doc["fsmImageUrl"][0]}}' style="max-height:100%" alt='{{doc["fsmTitle"][0]}}' title='{{doc["fsmTitle"][0]}}'/></a>
-            </div>
+              <img class="img" src='{{doc["fsmImageUrl"][0]}}' style="max-height:100%" alt='{{doc["fsmTitle"][0]}}'/>
+              <div class="cover">
+                <h3>{{doc["fsmTitle"][0]}}</h3>
+              </div>
+              </a>
+            </li>
           {% endfor %}
-        </div>
+        </ul>
 
       {% elif typeOfResource == "text" %}
         <div id="text-result">
@@ -89,7 +93,6 @@
         "height": height + "px"
       });
     });
-
   });
 </script>
 {% endblock %}

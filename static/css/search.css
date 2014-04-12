@@ -12,13 +12,59 @@ legend {
 	margin-bottom: 0px;
 }
 
-.img-result {
-    width: 19%;
-    float: left;
-    border-style:solid;
-	border-width:5px;
-	border-color: rgba(0,0,0,0.5);
-	background-color: rgba(0,0,0,0.3);
+#img-result {
+	list-style: none;
+	margin: 0; padding: 0;
+}
+
+#img-result li {
+	float:left;
+}
+
+#img-result a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#img-result .img-result {
+	display: block;
+	position: relative;
+	width: 17.5%;
+	border-style: solid;
+	border-width: 0.025%;
+	margin: 1%;
+}
+
+.img-result img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.cover {
+	position: absolute;
+	top: 0; right: 0;
+	bottom: 0; left: 0;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	color: rgba(255,255,255,0);
+	transition: all 0.15s linear;
+}
+
+.cover h3 {
+	background-color: rgba(0,0,0,0);
+	font-size: 120%;
+}
+
+#img-result a:hover .cover {
+	background-color: rgba(0,0,0,.8);
+  	color: rgba(255,255,255,1);
+  	transition: all 0.15s linear;
+}
+
+#img-result a:hover h3 {
+  	color: rgba(255,255,255,1);
 }
 
 .result {
