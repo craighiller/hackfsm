@@ -17,50 +17,50 @@ def snippetHandler():
     query = request.query['query']
     queryLower = query.lower()
     teiUrl = request.query["fsmTeiUrl"]
-    xml = et.fromstring(urllib2.urlopen(teiUrl).read())
+    r = urllib2.urlopen(teiUrl).read()
+    xml = et.fromstring(r)
     text = xml.findall("text")[0] # ignore the header
 
-    targets = []
-
-    def acquireTargets(xmlNode):
+    def acquireTarget(xmlNode):
         """
-        Gets a list of all perfect matches in the TEI document with the
-        query ignoring case.
+        Gets a snippet for a target from the XML
         """
         if xmlNode.text and xmlNode.text.lower().find(queryLower) != -1:
-            targets.append(xmlNode.text)
+            return xmlNode.text
+        temp = None
         for child in xmlNode:
-            acquireTargets(child)
+            if not temp:
+                temp = acquireTarget(child)
         if xmlNode.tail and xmlNode.tail.lower().find(queryLower) != -1:
-            targets.append(xmlNode.tail)
+            return xmlNode.tail
+        return temp
 
-    acquireTargets(text)
+    target = acquireTarget(text)
 
     response.add_header('content-type', 'application/json')
 
-    if len(targets) != 0:
+    if target:
         # use the first match and highlight it
-        target = targets[0]
 
         # use regex to match it so we can ignore case.
         subbedTarget = re.sub(query, "<mark>" + query + "</mark>", target, flags=re.IGNORECASE)
-
-        myResponse = {'snippet':subbedTarget, 'matches':len(targets)}
+        count = r.lower().count(queryLower) # find number of times query appears in the response
+        myResponse = {'snippet':subbedTarget, 'matches':count}
         return json.dumps(myResponse)
     else:
         # there were no pure matches.  Just get something so the user has a snippet
-        easterEgg = []
         def acquireEasterEgg(egg):
             """
             Gets the first word block in the TEI text that seems reasonable
             """
-            if len(easterEgg): # we got something, halt the recursion
-                return
             if egg.text and len(egg.text.strip()) > 20: # make sure we don't get something short
-                easterEgg.append(egg.text)
+                return egg.text
+            temp = None
             for chicken in egg:
-                acquireEasterEgg(chicken)
+                if not temp:
+                    temp = acquireEasterEgg(chicken)
+            return temp
 
-        acquireEasterEgg(text)
-        myResponse = {'snippet':easterEgg[0], 'matches':0}
+        easterEgg = acquireEasterEgg(text)
+        myResponse = {'snippet':easterEgg, 'matches':0}
         return json.dumps(myResponse)
