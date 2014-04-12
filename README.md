@@ -28,7 +28,7 @@ sudo apt-get install python
 sudo apt-get install git
 git clone https://github.com/craighiller/hackfsm
 cd hackfsm
-printf 'FSM_APP_ID = “APP_ID”\nFSM_APP_KEY = "APP_KEY"' > environment_variables.py
+printf 'FSM_APP_ID = "APP_ID"\nFSM_APP_KEY = "APP_KEY"' > environment_variables.py
 nohup sudo python main.py >> log 2>&1 &
 ```
 The server can be changed to use something other than CherryPy by following instructions on this page: http://bottlepy.org/docs/dev/deployment.html
