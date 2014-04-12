@@ -62,7 +62,7 @@
       $.ajax({
         url: '/find_snippets',
         type: 'GET',
-        data: {'fsmTeiUrl': obj.id, 'query': '{{query}}'},
+        data: {'fsmTeiUrl': obj.id, 'query': "{{query}}"},
         dataType: 'json',
         success: function(data, status){
           obj.innerHTML = data.snippet;

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys, os
+import logging
 
 package_dir = "packages"
 package_dir_path = os.path.join(os.path.dirname(__file__), package_dir)
@@ -37,5 +38,5 @@ def images(filename):
 def main():
     return template("home.html")
 
-run(host='0.0.0.0', port=8000, server="cherrypy")
+run(host='0.0.0.0', port=8000, debug=True)
 
