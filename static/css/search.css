@@ -54,6 +54,7 @@ legend {
 
 .cover h3 {
 	background-color: rgba(0,0,0,0);
+	font-size: 120%;
 }
 
 #img-result a:hover .cover {
