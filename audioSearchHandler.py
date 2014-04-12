@@ -22,7 +22,18 @@ def audioSearchHandler():
         collection = 1712 # default to UCSF Archives and Special Collections
     else:
         collection = int(collection)
-    results = popup(q, collection)
+
+    start = request.query.start
+    if not start:
+        # no start parameter
+        # we need query parameters so that the page links at the bottom of search will look right
+        template_values["queryParameters"] = request.query_string
+        start = 1
+    else:
+        # using a start page parameter.  Parse it off so we can reconstruct paging links properly
+        template_values["queryParameters"] = "&".join(request.query_string.split('&')[:-1])
+
+    results = popup(q, collection, start)
 
     # if popup archive returns no results we need to protect ourselves
     if 'results' in results.keys():
@@ -34,6 +45,6 @@ def audioSearchHandler():
     template_values["response"] = info
     template_values["collection"] = collection
     template_values["typeOfResource"] = "audio"
-    template_values["numPages"] = 1
+    template_values["numPages"] = 1 # wat?
     template_values["query"] = request.query["q"]
     return template("search.html", template_values)

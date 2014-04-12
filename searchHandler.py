@@ -18,8 +18,7 @@ def searchHandler():
         temp = ''
         if 'collectionFilter' in request.query:
             temp += '&collection=' + request.query.collectionFilter
-        redirect("/audioSearch?q=" + q + temp)
-        return
+        return redirect("/audioSearch?q=" + q + temp)
     elif typeOfResource == "image":
         q = appendToQuery(q, '-fsmTeiUrl:[* TO *]') # don't show written text
     else:
