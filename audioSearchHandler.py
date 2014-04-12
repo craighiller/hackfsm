@@ -1,6 +1,4 @@
 import jinja2
-import os
-import logging
 
 from xml.etree import ElementTree as et
 

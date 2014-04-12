@@ -3,7 +3,7 @@ from xml.etree import ElementTree as et
 import json
 import re
 
-from bottle import request, response, route, TEMPLATE_PATH, jinja2_template as template
+from bottle import request, response, route, jinja2_template as template
 
 @route('/find_snippets')
 def snippetHandler():

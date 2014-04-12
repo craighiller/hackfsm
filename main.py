@@ -8,7 +8,7 @@ sys.path.insert(0, package_dir_path)
 import bottle
 
 from bottle import get, route, run, jinja2_template as template
-from bottle import static_file
+from bottle import static_file, error
 
 
 from searchHandler import searchHandler
@@ -16,8 +16,6 @@ from audioHandler import audioHandler
 from articleHandler import articleHandler
 from audioSearchHandler import audioSearchHandler
 from snippetHandler import snippetHandler
-
-from bottle import error
 
 @error(404)
 def custom404(error):
