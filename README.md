@@ -10,9 +10,11 @@ This project was made at the FSM hackathon (4/1/14 - 4/12/14). The project's mai
 
 ## Technologies used
 
-- Bottle as web-framework with jinja2 for templates (with markupsafe).
+- Bottle as web-framework with jinja2 for templates with markupsafe
 - CherryPy for server (all included within /packages)
-- TimelineJS for timeline on home page: https://docs.google.com/spreadsheet/ccc?key=0AgsTsRYqkaypdFRPaDY0ZDFmZEZfN0tkT04yU0oxMVE&usp=sharing#gid=0
+- TimelineJS for timeline on home page (http://timeline.knightlab.com/)
+
+spreadsheet used for timeline data: https://docs.google.com/spreadsheet/ccc?key=0AgsTsRYqkaypdFRPaDY0ZDFmZEZfN0tkT04yU0oxMVE&usp=sharing#gid=0
 
 Templates can be found in the views folder and static files in static folder.
 All controllers end with the name Handler.py
