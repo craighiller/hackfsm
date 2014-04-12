@@ -12,13 +12,13 @@ This project was made at the FSM hackathon (4/1/14 - 4/12/14). The project's mai
 - Bottle as web-framework with jinja2 for templates (with markupsafe).
 - CherryPy for server (all included within /packages)
 
-Templates in the views folder, static files in static folder
+Templates can be found in the views folder and static files in static folder.
 All controllers end with the name Handler.py
 
 ## Deployment
 
 ### Local
-You can just run `python main.py` to start the server, app should be accessible on localhost:port.
+You can just run `python main.py` to start the server and access the app on localhost:port.
 Sudo is required to run on port 80, but the port can be changed by altering main.py
 
 ### Server
