@@ -24,7 +24,6 @@ All controllers end with the name Handler.py
 
 ## Deployment
 
-Locally you can just run `python main.py`
-to start the server, app should be accessible on localhost:port
-Sudo is required to run on port 80
-port can be changed by modify main.py
+### Local
+You can just run `python main.py` to start the server, app should be accessible on localhost:port.
+Sudo is required to run on port 80, but the port can be changed by altering main.py
