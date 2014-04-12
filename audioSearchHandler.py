@@ -14,7 +14,7 @@ def audioSearchHandler():
     Handle searching the popup archive
     Uses the search template
     """
-    q = request.query["q"]
+    q = request.query["search"]
     if not q:
         q = "[* TO *]" # blank query, collect all
     collection = request.query.collection
@@ -46,6 +46,6 @@ def audioSearchHandler():
     template_values["response"] = info
     template_values["collection"] = collection
     template_values["typeOfResource"] = "audio"
-    template_values["numPages"] = 1 # wat?
-    template_values["query"] = request.query["q"]
+    template_values["numPages"] = 1 # only use one page to display the audio results (Don't think there are more)
+    template_values["query"] = request.query["search"]
     return template("search.html", template_values)
