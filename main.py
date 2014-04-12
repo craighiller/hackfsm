@@ -37,5 +37,5 @@ def images(filename):
 def main():
     return template("home.html")
 
-run(host='0.0.0.0', port=8000, server="cherrypy")
+run(host='0.0.0.0', port=8000, server="cherrypy", debug=True)
 

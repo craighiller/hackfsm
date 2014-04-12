@@ -8,6 +8,10 @@ h4 {
 	clear: both;
 }
 
+legend {
+	margin-bottom: 0px;
+}
+
 .img-result {
     width: 19%;
     float: left;
@@ -17,8 +21,8 @@ h4 {
 	background-color: rgba(0,0,0,0.3);
 }
 
-legend {
-	margin-bottom: 0px;
+.caption {
+	color: white;
 }
 
 .result {
