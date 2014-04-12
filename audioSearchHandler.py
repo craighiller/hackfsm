@@ -23,6 +23,8 @@ def audioSearchHandler():
     else:
         collection = int(collection)
 
+    template_values = {}
+
     start = request.query.start
     if not start:
         # no start parameter
@@ -41,7 +43,6 @@ def audioSearchHandler():
     else:
         info = ""
 
-    template_values = {}
     template_values["response"] = info
     template_values["collection"] = collection
     template_values["typeOfResource"] = "audio"

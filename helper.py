@@ -98,19 +98,29 @@ def appendToQuery(q, elem):
     return q + ' AND ' + elem
 
 tei_to_html_tags = {
-    "item":"li",
     "list":"ol",
+    "item":"li",
     "pb":"br"
 }
 
 def xmlToHTML(e):
     """
     Converts a XML tree to an approximate HTML tree.
-    Works in conjunction with tei_to_html_tags
-    to convert tags that don't exist in HTML
+    Convert tags that don't exist in HTML
     """
     if e.tag in ['lb', 'salute', 'signed']:
         tag_to_use = 'br'
+    elif e.tag == 'q':
+        if 'blockquote' in e.attrib.values():
+            print("swag"*90)
+            tag_to_use = 'blockquote'
+    elif e.tag == 'emph':
+        if 'italics' in e.attrib.values():
+            tag_to_use = 'em'
+        elif 'bold' in e.attrib.values():
+            tag_to_use = 'b'
+        elif 'under' in e.attrib.values():
+            tag_to_use = 'u'
     elif e.tag in tei_to_html_tags:
         tag_to_use = tei_to_html_tags[e.tag]
     else:
