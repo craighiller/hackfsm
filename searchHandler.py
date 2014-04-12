@@ -8,8 +8,8 @@ import cgi
 def searchHandler():
     """
     Handles all search requests.  If it is directed at the popup archive
-    redirects the request to audioSearchHandler.  Otherwise this handles
-    the FSM archive setup
+    then redirects the request to audioSearchHandler. Otherwise it handles
+    the FSM archive setup.
     """
     q = request.query.search
     typeOfResource = request.query.type
@@ -27,8 +27,6 @@ def searchHandler():
         q = appendToQuery(q, '-fsmImageUrl:[* TO *]') # don't show images
 
     typesOfResourcesList = queryPluck(q)['facet_counts']['facet_fields']['fsmTypeOfResource']
-    assert len(typesOfResourcesList) % 2 == 0
-
     typesOfResourcesDict = {'other':0}
     # generate a dictionary of the top 5 and collect everything else to other
     for i in xrange(0, len(typesOfResourcesList), 2):
@@ -38,7 +36,6 @@ def searchHandler():
             typesOfResourcesDict[typesOfResourcesList[i]] = typesOfResourcesList[i+1]
 
     filterType = request.query.getall('filterType')
-
     if 'other' in filterType: 
         # exclude what is not in the filterType
         exclusion = set(typesOfResourcesDict.keys()) - set(filterType) - set('other')
@@ -65,7 +62,6 @@ def searchHandler():
 
     rowsPerPage = 15
     startRow = (int(start) - 1)*rowsPerPage
-
     results = query(q, startRow, rowsPerPage)
 
     template_values["typeOfResource"] = typeOfResource

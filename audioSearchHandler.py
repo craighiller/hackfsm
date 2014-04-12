@@ -1,10 +1,6 @@
-import jinja2
-
 from xml.etree import ElementTree as et
-
 from helper import *
-
-from bottle import request, route, TEMPLATE_PATH, jinja2_template as template
+from bottle import request, route, jinja2_template as template
 
 @route('/audioSearch')
 def audioSearchHandler():

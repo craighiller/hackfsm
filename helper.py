@@ -10,28 +10,32 @@ def queryPluck(q):
     Returns a python dictionary
     """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
-    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
-                          'wt':'python',
-                          'app_id':FSM_APP_ID,
-                          'app_key':FSM_APP_KEY,
-                          'facet':'true',
-                          'facet.field':'fsmTypeOfResource',
-                          'facet.mincount':1})
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({
+        'q':q,
+        'wt':'python',
+        'app_id':FSM_APP_ID,
+        'app_key':FSM_APP_KEY,
+        'facet':'true',
+        'facet.field':'fsmTypeOfResource',
+        'facet.mincount':1
+    })
     result = urllib2.urlopen(url)
     return eval(result.read())
 
-def query(q, start="0", rowsPerPage="30"):
+def query(q, start="0", rowsPerPage="15"):
     """
     Helper to send and evaluate queries to FSM archive
     Returns a python dictionary
     """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
-    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':q,
-                          'start':start,
-                          'wt':'python',
-                          'app_id':FSM_APP_ID,
-                          'app_key':FSM_APP_KEY,
-                          'rows':rowsPerPage})
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({
+        'q':q,
+        'start':start,
+        'wt':'python',
+        'app_id':FSM_APP_ID,
+        'app_key':FSM_APP_KEY,
+        'rows':rowsPerPage
+    })
     result = urllib2.urlopen(url)
     return eval(result.read())
 
@@ -41,10 +45,12 @@ def find(id):
     Returns a python dictionary
     """
     BASE_URL = 'https://apis.berkeley.edu/solr/fsm/select'
-    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({'q':'id:' + id,
+    url = "{base_url}?".format(base_url=BASE_URL) + urllib.urlencode({
+        'q':'id:' + id,
         'wt':'json',
         'app_id':FSM_APP_ID,
-        'app_key':FSM_APP_KEY})
+        'app_key':FSM_APP_KEY
+    })
     result = urllib2.urlopen(url)
     return eval(result.read())
 
@@ -60,8 +66,7 @@ def popup(q, collection, page):
         'page':page
     })
     result = urllib2.urlopen(url)
-    j = json.loads(result.read())
-    return j
+    return json.loads(result.read())
 
 def popupFindById(id):
     """
@@ -73,8 +78,7 @@ def popupFindById(id):
         'query':'id:' + id,
     })
     result = urllib2.urlopen(url)
-    j = json.loads(result.read())
-    return j
+    return json.loads(result.read())
     
 def getTranscript(item_id, audio_id):
     """
@@ -85,8 +89,7 @@ def getTranscript(item_id, audio_id):
     BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"
     url = BASE_URL.format(item_id = item_id, audio_file_id = audio_id)
     result = urllib2.urlopen(url)
-    j = json.loads(result.read())
-    return j
+    return json.loads(result.read())
     
 def appendToQuery(q, elem):
     """
@@ -103,37 +106,37 @@ tei_to_html_tags = {
     "pb":"br"
 }
 
-def xmlToHTML(e):
+def xmlToHTML(xml):
     """
-    Converts a XML tree to an approximate HTML tree.
-    Convert tags that don't exist in HTML
+    Converts a XML tree to an appropriate HTML string 
+    by converting tags that don't exist in HTML to their
+    matches.
     """
-    if e.tag in ['lb', 'salute', 'signed']:
+    if xml.tag in ['lb', 'salute', 'signed']:
         tag_to_use = 'br'
-    elif e.tag == 'q':
-        if 'blockquote' in e.attrib.values():
-            print("swag"*90)
+    elif xml.tag == 'q':
+        if 'blockquote' in xml.attrib.values():
             tag_to_use = 'blockquote'
-    elif e.tag == 'emph':
-        if 'italics' in e.attrib.values():
+    elif xml.tag == 'emph':
+        if 'italics' in xml.attrib.values():
             tag_to_use = 'em'
-        elif 'bold' in e.attrib.values():
+        elif 'bold' in xml.attrib.values():
             tag_to_use = 'b'
-        elif 'under' in e.attrib.values():
+        elif 'under' in xml.attrib.values():
             tag_to_use = 'u'
-    elif e.tag in tei_to_html_tags:
-        tag_to_use = tei_to_html_tags[e.tag]
+    elif xml.tag in tei_to_html_tags:
+        tag_to_use = tei_to_html_tags[xml.tag]
     else:
-        tag_to_use = e.tag
+        tag_to_use = xml.tag
     ret_val =  '<%s>' % tag_to_use
-    if e.text:
-        ret_val += e.text
-    for n in e:
-        ret_val += xmlToHTML(n)
-    if e.tag == 'signed':
+    if xml.text:
+        ret_val += xml.text
+    for child in xml:
+        ret_val += xmlToHTML(child)
+    if xml.tag == 'signed':
         ret_val += '<br><br>'
-    elif not e.tag in ['lb', 'dateline', 'salute']:
+    elif not xml.tag in ['lb', 'dateline', 'salute']:
         ret_val += '</%s>' % tag_to_use
-    if e.tail:
-        ret_val += e.tail
+    if xml.tail:
+        ret_val += xml.tail
     return ret_val

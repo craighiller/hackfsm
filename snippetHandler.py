@@ -1,9 +1,9 @@
-import urllib2
+from bottle import request, response, route, jinja2_template as template
 from xml.etree import ElementTree as et
+
+import urllib2
 import json
 import re
-
-from bottle import request, response, route, jinja2_template as template
 
 @route('/find_snippets')
 def snippetHandler():
@@ -16,25 +16,23 @@ def snippetHandler():
     """
     query = request.query['query']
     queryLower = query.lower()
-
     teiUrl = request.query["fsmTeiUrl"]
-    r = urllib2.urlopen(teiUrl).read()
-    xml = et.fromstring(r)
+    xml = et.fromstring(urllib2.urlopen(teiUrl).read())
     text = xml.findall("text")[0] # ignore the header
 
     targets = []
 
-    def acquireTargets(e):
+    def acquireTargets(xmlNode):
         """
         Gets a list of all perfect matches in the TEI document with the
         query ignoring case.
         """
-        if e.text and e.text.lower().find(queryLower) != -1:
-            targets.append(e.text)
-        for n in e:
-            acquireTargets(n)
-        if e.tail and e.tail.lower().find(queryLower) != -1:
-            targets.append(e.tail)
+        if xmlNode.text and xmlNode.text.lower().find(queryLower) != -1:
+            targets.append(xmlNode.text)
+        for child in xmlNode:
+            acquireTargets(child)
+        if xmlNode.tail and xmlNode.tail.lower().find(queryLower) != -1:
+            targets.append(xmlNode.tail)
 
     acquireTargets(text)
 
@@ -51,18 +49,18 @@ def snippetHandler():
         return json.dumps(myResponse)
     else:
         # there were no pure matches.  Just get something so the user has a snippet
-        something = []
-        def acquireSomething(e):
+        easterEgg = []
+        def acquireEasterEgg(egg):
             """
             Gets the first word block in the TEI text that seems reasonable
             """
-            if len(something): # we got something, halt the recursion
+            if len(easterEgg): # we got something, halt the recursion
                 return
-            if e.text and len(e.text.strip()) > 20: # make sure we don't get something short
-                something.append(e.text)
-            for n in e:
-                acquireSomething(n)
+            if egg.text and len(egg.text.strip()) > 20: # make sure we don't get something short
+                easterEgg.append(egg.text)
+            for chicken in egg:
+                acquireEasterEgg(chicken)
 
-        acquireSomething(text)
-        myResponse = {'snippet':something[0], 'matches':0}
+        acquireEasterEgg(text)
+        myResponse = {'snippet':easterEgg[0], 'matches':0}
         return json.dumps(myResponse)
