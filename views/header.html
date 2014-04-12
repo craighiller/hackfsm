@@ -7,13 +7,13 @@
                     <input type="search" name="search" placeholder="Enter your keyword..." value="{{query}}"> 
                 </label>
                 <button type="submit" class="btn btn-inverse btn-lg">Search the Archive!</button><br>
-                <label><input type="radio" name="type" value="text" checked="true"}}>Text</label>
-                <label><input type="radio" name="type" value="image" 
+                <label><input type="radio" class="submit" name="type" value="text" checked="true"}}>Text</label>
+                <label><input type="radio" class="submit" name="type" value="image" 
                 	{% if typeOfResource == "image" %}
                 		checked="true"
                 	{% endif %}>Image
                 </label>
-                <label><input type="radio" name="type" value="audio" 
+                <label><input type="radio" class="submit" name="type" value="audio" 
                     {% if typeOfResource == "audio" %}
                         checked="true"
                     {% endif %}>Audio
@@ -28,26 +28,26 @@
             {% if typeOfResource == "text" %}
                 {% for key in types %}
                     {% if key != "other" %}
-                        <label><input type="checkbox" name="filterType" value="{{key}}" 
+                        <label><input type="checkbox" class="submit" name="filterType" value="{{key}}" 
                             {% if key in filterType %}     
                                 checked="true"
-                            {% endif %} onclick="this.form.submit();"> {{key}} ({{types[key]}}) <br></label>
+                            {% endif %}> {{key}} ({{types[key]}}) <br></label>
                     {% endif %}
                 {% endfor %}
 
-                <label><input type="checkbox" name="filterType" value="other" 
+                <label><input type="checkbox" class="submit" name="filterType" value="other" 
                     {% if "other" in filterType %}     
                         checked="true"
-                    {% endif %} onclick="this.form.submit();"> other ({{types["other"]}}) <br></label>
+                    {% endif %}> other ({{types["other"]}}) <br></label>
             {% elif typeOfResource == "audio" %}
-                <label><input type="radio" name="collectionFilter" value="1712" onclick="this.form.submit();"
+                <label><input type="radio" class="submit" name="collectionFilter" value="1712" onclick="this.form.submit();"
                     {% if 1703 != collection %}
                         checked="true"
-                    {% endif %} onclick="this.form.submit();">UCSF Archives & Special Collections</label><br>
-                <label><input type="radio" name="collectionFilter" value="1703" 
+                    {% endif %}>UCSF Archives & Special Collections</label><br>
+                <label><input type="radio" class="submit" name="collectionFilter" value="1703" 
                     {% if 1703 == collection %}
                         checked="true"
-                    {% endif %} onclick="this.form.submit();">UC-Berkeley Ethnic Studies Library</label>
+                    {% endif %}>UC-Berkeley Ethnic Studies Library</label>
             {% endif %}
         </fieldset>
     </div> 
