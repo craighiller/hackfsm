@@ -10,7 +10,7 @@
           {% for doc in response %}
             <div class="img-result">
               <a href={{"/article?id=" + doc["id"].replace(' ', '%20')}}>
-              <img src={{doc["fsmImageUrl"][0]}} style="max-height:100%" alt={{doc["fsmTitle"][0]}}/></a>
+              <img src='{{doc["fsmImageUrl"][0]}}' style="max-height:100%" alt='{{doc["fsmTitle"][0]}}' title='{{doc["fsmTitle"][0]}}'/></a>
             </div>
           {% endfor %}
         </div>
