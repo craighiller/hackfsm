@@ -17,6 +17,16 @@ from articleHandler import articleHandler
 from audioSearchHandler import audioSearchHandler
 from snippetHandler import snippetHandler
 
+from bottle import error
+
+@error(404)
+def custom404(error):
+    return template("404.html")
+
+@error(500)
+def custom500(error):
+    return template("500.html")
+
 @get('/<filename:re:.*\.css>')
 def stylesheets(filename):
     return static_file(filename, root='static/css')
@@ -29,5 +39,5 @@ def images(filename):
 def main():
     return template("home.html")
 
-run(host='0.0.0.0', port=8000, server="cherrypy")
+run(host='0.0.0.0', port=80, server="cherrypy")
 
