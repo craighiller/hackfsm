@@ -21,7 +21,7 @@
                 <source src={{audioDict["url"]}}>
                 <embed height="50" width="100" src={{audioDict["url"]}}>   
             </audio>
-            <button class="toggle-button"> Transcript </button>
+            <button class="toggle-button"> Show/Hide Transcript </button>
             <div id="transcript">
               {% for line in audioDict["transcript"] %}
                 <p>{{line["start"]}} &nbsp; &nbsp; {{line["text"]}}</p>
