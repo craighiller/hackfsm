@@ -42,7 +42,7 @@
         <div id="audio-result">
           {% for doc in response %}
             <div class="result">
-                <a class="link" href={{"/audioId?id=%s" % doc["id"]}}>{{doc["title"]}}</a>
+                <a class="link" href={{"/audioId?id=%s" % doc["id"]}}>{{doc["title"].strip("[]")}}</a>
                 <p class="description">{{doc["description"]}}</p>
             </div>
           {% endfor %} 
