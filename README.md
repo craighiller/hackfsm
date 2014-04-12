@@ -1,16 +1,16 @@
 hackFSM
 =============
 
-### About
+## About
 
 Free Speech Movement
 
 This project was made at the FSM hackathon which occured from 4/1/14 - 4/12/14.
-The database is provided by the Bancroft Library FSM archive accessible though
+The API is provided by the Bancroft Library FSM archive accessible though
 the HTTPS queries with solr.
 
 The project's main intent is to display the archive data in a more manageable format,
-and provide a clean ui for learning and researching the free speech movement.
+and provide a clean UI for learning and researching the free speech movement.
 
 ## Technologies used
 
@@ -25,4 +25,6 @@ All controllers end with the name Handler.py
 ## Deployment
 
 Locally you can just run `python main.py`
+to start the server, app should be accessible on localhost:port
 Sudo is required to run on port 80
+port can be changed by modify main.py
