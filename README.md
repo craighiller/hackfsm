@@ -5,12 +5,7 @@ hackFSM
 
 Free Speech Movement
 
-This project was made at the FSM hackathon which occured from 4/1/14 - 4/12/14.
-The API is provided by the Bancroft Library FSM archive accessible though
-the HTTPS queries with solr.
-
-The project's main intent is to display the archive data in a more manageable format,
-and provide a clean UI for learning and researching the free speech movement.
+This project was made at the FSM hackathon (4/1/14 - 4/12/14). The project's main intent is to display the archive data in a more manageable format, and provide a clean UI for learning and researching the free speech movement. The API is provided by the Bancroft Library FSM archive accessible though the HTTPS queries with solr.
 
 ## Technologies used
 
