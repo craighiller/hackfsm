@@ -1,6 +1,6 @@
 hackFSM
 =============
-Running on 2n.io
+Running on http://2n.io
 
 ## About
 
