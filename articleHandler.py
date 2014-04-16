@@ -1,4 +1,4 @@
-import urllib2
+from google.appengine.api import urlfetch
 from bottle import request, route, jinja2_template as template
 from xml.etree import ElementTree as et
 from helper import *
@@ -9,6 +9,7 @@ def articleHandler():
     Handle gathering information about a single article (image or TEI)
     Uses the result template
     """
+    #print("HI")
     myId = request.query["id"].replace(':', '\:') # escape the colon metacharacter
     info = find(myId)["response"]["docs"][0] # get the first doc (should only be one)
     del info['id'] # del keys (don't display them at the bottom of result page)
@@ -20,10 +21,10 @@ def articleHandler():
     else:
         teiUrl = info["fsmTeiUrl"][-1]
         del info['fsmTeiUrl']
-        r = urllib2.urlopen(teiUrl).read()
+        r = urlfetch.fetch(teiUrl).content
         xml = et.fromstring(r)
         text = xml.findall("text")[0] # ignore the TEI header, only get content
         template_values['content'] = xmlToHTML(text)
 
     template_values['results'] = info
-    return template("views/result.html", template_values)
+    print(template("views/result.html", template_values))

@@ -1,4 +1,4 @@
-import urllib2
+from google.appengine.api import urlfetch
 import urllib
 from environment_variables import *
 import json
@@ -19,8 +19,8 @@ def queryPluck(q):
         'facet.field':'fsmTypeOfResource',
         'facet.mincount':1
     })
-    result = urllib2.urlopen(url)
-    return eval(result.read())
+    result = urlfetch.fetch(url)
+    return eval(result.content)
 
 def query(q, start="0", rowsPerPage="15"):
     """
@@ -36,8 +36,8 @@ def query(q, start="0", rowsPerPage="15"):
         'app_key':FSM_APP_KEY,
         'rows':rowsPerPage
     })
-    result = urllib2.urlopen(url)
-    return eval(result.read())
+    result = urlfetch.fetch(url)
+    return eval(result.content)
 
 def find(id):
     """
@@ -51,8 +51,8 @@ def find(id):
         'app_id':FSM_APP_ID,
         'app_key':FSM_APP_KEY
     })
-    result = urllib2.urlopen(url)
-    return eval(result.read())
+    result = urlfetch.fetch(url)
+    return eval(result.content)
 
 def popup(q, collection, page):
     """
@@ -65,8 +65,8 @@ def popup(q, collection, page):
         'filters[collection_id]':collection,
         'page':page
     })
-    result = urllib2.urlopen(url)
-    return json.loads(result.read())
+    result = urlfetch.fetch(url)
+    return json.loads(result.content)
 
 def popupFindById(id):
     """
@@ -77,8 +77,8 @@ def popupFindById(id):
     url = "{base_url}".format(base_url=BASE_URL) + urllib.urlencode({
         'query':'id:' + id,
     })
-    result = urllib2.urlopen(url)
-    return json.loads(result.read())
+    result = urlfetch.fetch(url)
+    return json.loads(result.content)
     
 def getTranscript(item_id, audio_id):
     """
@@ -88,8 +88,8 @@ def getTranscript(item_id, audio_id):
     """
     BASE_URL = "https://www.popuparchive.com:443/api/items/{item_id}/audio_files/{audio_file_id}/transcript"
     url = BASE_URL.format(item_id = item_id, audio_file_id = audio_id)
-    result = urllib2.urlopen(url)
-    return json.loads(result.read())
+    result = urlfetch.fetch(url)
+    return json.loads(result.content)
     
 def appendToQuery(q, elem):
     """

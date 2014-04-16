@@ -31,3 +31,4 @@ def main():
     return template("home.html")
 
 bottle.run(server="gae", debug=True)
+app = bottle.app()

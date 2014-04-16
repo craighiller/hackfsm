@@ -1,7 +1,7 @@
 from bottle import request, response, route, jinja2_template as template
 from xml.etree import ElementTree as et
+from google.appengine.api import urlfetch
 
-import urllib2
 import json
 import re
 
@@ -17,7 +17,7 @@ def snippetHandler():
     query = request.query['query']
     queryLower = query.lower()
     teiUrl = request.query["fsmTeiUrl"]
-    r = urllib2.urlopen(teiUrl).read()
+    r = urlfetch.fetch(teiUrl).content
     xml = et.fromstring(r)
     text = xml.findall("text")[0] # ignore the header
 
