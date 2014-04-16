@@ -33,4 +33,4 @@ def audioHandler():
 
     # only show certain things.  Because the user shouldn't care about id, collection title etc.
     template_values["keysToDisplay"] = ['image_files', 'description', 'title', 'date_broadcast', 'date_created', 'series_title']
-    return template("result.html", template_values)
+    return template("views/result.html", template_values)

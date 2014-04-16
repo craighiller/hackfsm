@@ -70,4 +70,4 @@ def searchHandler():
     template_values["query"] = cgi.escape(request.query.search) # block XSS with cgi escape
     template_values["numPages"] = (results["response"]["numFound"] // rowsPerPage) + 1
     template_values["response"] = results["response"]["docs"]
-    return template("search.html", template_values)
+    return template("views/search.html", template_values)

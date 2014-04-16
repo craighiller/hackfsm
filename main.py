@@ -30,4 +30,4 @@ def custom500(error):
 def main():
     return template("home.html")
 
-run(server="gae")
+bottle.run(server="gae", debug=True)
