@@ -8,8 +8,10 @@ sys.path.insert(0, package_dir_path)
 
 import bottle
 
-from bottle import get, route, run, jinja2_template as template
+from bottle import get, route, run, jinja2_template as template, debug
 from bottle import static_file, error
+
+from google.appengine.ext.webapp.util import run_wsgi_app
 
 
 from searchHandler import searchHandler
@@ -27,8 +29,12 @@ def custom500(error):
     return template("500.html")
 
 @route('/')
-def main():
+def home():
     return template("home.html")
 
-bottle.run(server="gae", debug=True)
-app = bottle.app()
+def main():
+	debug(True)
+	run_wsgi_app(bottle.default_app())
+
+if __name__=="__main__":
+	main()
