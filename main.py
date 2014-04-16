@@ -26,16 +26,8 @@ def custom404(error):
 def custom500(error):
     return template("500.html")
 
-@get('/<filename:re:.*\.css>')
-def stylesheets(filename):
-    return static_file(filename, root='static/css')
-
-@get('/<filename:re:.*\.(jpg|png|gif|ico)>')
-def images(filename):
-    return static_file(filename, root='static/img')
-
 @route('/')
 def main():
     return template("home.html")
 
-run(host='0.0.0.0', port=80, server="cherrypy")
+run(server="gae")

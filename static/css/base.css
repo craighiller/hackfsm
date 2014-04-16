@@ -5,7 +5,7 @@ html, body{
 }
 
 body {
-	background: url(/background.jpg) fixed; 
+	background: url(/static/img/background.jpg) fixed; 
   	background-size: cover;
   	background-repeat: no-repeat;
 }
